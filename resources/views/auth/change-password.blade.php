@@ -260,7 +260,7 @@
             </form>
 
             <div class="back-link">
-                <a href="{{ route('dashboard') ?? '/' }}">← Voltar ao Dashboard</a>
+                <a href="{{ url('/') }}">← Voltar ao Dashboard</a>
             </div>
         </div>
     </div>
