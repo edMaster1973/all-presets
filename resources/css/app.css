@@ -1,0 +1,28 @@
+@import url("~bootstrap/bootstrap.min.css");
+@import "./style.css";
+@import url("~fastbootstrap/fastbootstrap.min.css");
+@import url("~bootstrap-icons/bootstrap-icons.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css");
+
+// theme based visibility
+#sunIcon {
+  display: none;
+}
+[data-bs-theme="dark"] #sunIcon {
+  display: inline;
+}
+[data-bs-theme="dark"] #moonIcon {
+  display: none;
+}
+[data-bs-theme="light"] #sunIcon {
+  display: none;
+}
+[data-bs-theme="light"] #moonIcon {
+  display: inline;
+}
+
+
+
+
+
+
