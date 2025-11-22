@@ -1,0 +1,43 @@
+.back-to-top {
+    /* Posição Fixa no canto inferior direito */
+    position: fixed;
+    bottom: 20px; /* Distância do fundo */
+    right: 20px; /* Distância da lateral */
+
+    /* Estilo do botão */
+    background-color: #007bff; /* Cor de fundo */
+    color: white; /* Cor do texto/símbolo */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0; /* Esconde o botão inicialmente */
+    transition: opacity 0.3s, visibility 0.3s; /* Animação suave */
+    visibility: hidden;
+    z-index: 1000; /* Garante que fique acima de outros elementos */
+}
+
+/* Classe que será adicionada pelo JavaScript para mostrar o botão */
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.alert-box {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-weight: bold;
+}
+.alert-box.success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+.alert-box.error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}

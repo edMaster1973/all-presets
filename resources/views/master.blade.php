@@ -6,9 +6,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <link rel="shortcut icon" href="{{ asset('storage/images/favicon.ico') }}" >
-        {{-- <link href="/css/fastbootstrap.min.css" rel="stylesheet">
-        <link href="/css/style.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"> --}}
         <title>All Presets</title>
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -19,13 +16,9 @@
             <nav class="container-fluid px-md-3 px-lg-4">
                 <a class="p-0 p-1 m-0 rounded navbar-brand d-inline-flex align-items-center me-lg-6 me-xl-9 text-reset" href="/">
                     <span class=text-primary>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="#336aea" width="32" height="32" viewBox="0 0 32 32">
-                            <rect x="6" y="6" width="20" height="4"/>
-                            <rect x="6" y="14" width="20" height="4"/>
-                            <rect x="6" y="18" width="6" height="8"/>
-                        </svg>
+                        <img src="{{ asset('images/all-presets-logo.png') }}" alt="Logo All Presets" width="68" height="68">
                     </span>
-                    <h2 class="mb-0 d-none d-md-block fw-semibold fs-5 ls-wide ms-2">All Presets</h2>
+                    <h2 class="mb-0 d-none d-md-block fw-semibold fs-5 ls-wide ms-2"></h2>
                 </a>
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav navbar-nav-underline ps-lg-5 flex-grow-1">
@@ -57,14 +50,8 @@
 
                     <div class=position-relative>
                         <button class="border-0 btn" id="themeToggle">
-                            <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-moon" viewBox="0 0 16 16">
-                                <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286"/>
-                            </svg>
-                            <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-brightness-high" viewBox="0 0 16 16">
-                                <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
-                            </svg>
-                            {{-- <i class="bi bi-brightness-high"></i> --}}
-                            {{-- <i class="bi bi-moon"></i> --}}
+                            <i class="bi bi-brightness-high" id="sunIcon"></i>
+                            <i class="bi bi-moon-stars" id="moonIcon"></i>
                         </button>
                     </div>
 
@@ -75,9 +62,7 @@
                     <button class="btn d-lg-none" type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
                         <i class="fa fa-search"></i>
                     </button>
-                    <a class="nav-link d-none d-lg-block" href="#" target="_blank" rel="nofollow">
-                        {{-- <i class="fa-solid fa-circle-user"></i> --}}
-                        {{-- <img src="{{ asset('storage/profiles/perfil2.jpeg') }}" style="width: 35px; border-radius: 50%;"> --}}
+                    <a class="nav-link d-none d-lg-block" href="{{ route('registrar_se') }}" rel="nofollow">
                         <button class="btn btn-primary" type="button">Registrar-se</button>
                     </a>
                 </div>
@@ -164,13 +149,40 @@
                 </div>
             </div>
 
+
+
+        </div>
+
         </main>
 
     </div>
 
-    <!-- javascript -->
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="/assets/js/main.min.js"></script> --}}
+    <button id="scrollToTopBtn" title="Voltar ao Topo" class="back-to-top btn btn-primary">&#8679;</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const scrollBtn = document.getElementById('scrollToTopBtn');
+
+        // 1. Mostrar/Esconder o botão ao rolar a página
+        window.onscroll = function() {
+            // Verifica se a rolagem vertical (scrollY) é maior que 200 pixels
+            if (window.scrollY > 200) {
+                scrollBtn.classList.add('show');
+            } else {
+                scrollBtn.classList.remove('show');
+            }
+        };
+
+        // 2. Comportamento ao clicar no botão
+        scrollBtn.onclick = function() {
+            // Utiliza o método scrollTo com o objeto de opções
+            window.scrollTo({
+                top: 0, // Define o destino da rolagem para o topo (0px)
+                behavior: 'smooth' // Faz a rolagem de forma suave (animada)
+            });
+        };
+        });
+    </script>
 
     <script>
         function getTheme(){

@@ -75,6 +75,7 @@ return [
         public_path('images') => storage_path('app/images'),
         public_path('fotos') => storage_path('app/fotos'),
         public_path('profiles') => storage_path('app/profiles'),
+        public_path('temp_zip') => storage_path('app/temp_zip'),
     ],
 
 ];

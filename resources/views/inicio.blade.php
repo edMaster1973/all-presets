@@ -7,14 +7,14 @@
             <div class="row g-0">
                 <div class="col-12 col-md-8 col-lg-6">
                     <div class="py-4 py-md-6 py-lg-10 py-xl-20">
-                        <h4 class=mb-0>Bem-vindo(a) {{ Auth::user()->name }}</h4>
+                        <h4 class=mb-0>Bem-vindo(a) <span class="text-warning">{{ Auth::user()->name }}</span></h4>
                         <p class="mt-3 text-body-secondary">
-                            {{ Auth::user()->email }}.
+                            {{ Auth::user()->email }}
                         </p>
                     </div>
                 </div>
                 <div class="d-none d-md-block col-md-4 col-lg-6">
-                    <img class="h-auto max-w-sm w-100" src="{{ asset('storage/images/get-started@2x.png') }}">
+                    <img src="{{ asset('storage/images/img-fundo-4.png') }}" alt="Imagem de boas-vindas" width="580">
                 </div>
             </div>
         </div>
@@ -23,138 +23,329 @@
     <div class="bd-main-content">
         <div class="px-0 mx-auto max-w-screen-lx px-md-0 px-lg-0 px-xl-0">
             <div class="px-12 my-8 px-md-12 px-lg-20 px-xl-20 ">
+
+            @foreach ($errors->all() as $error)
+            <div class="row g-8">
+                <div class="col-md-12">
+                    <div class="text-center alert alert-primary alert-dismissible fade show" role="alert">
+                        {{ $error }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+
+
+
+                    <form action="#" method="POST">
+                        @csrf
+
+                        <div class="row g-8">
+
+                            <div class="col-md-2">
+                                <div class="mb-3 input-group">
+                                    <select class="form-select" name="marca" aria-label="Selecione a Marca">
+                                        <option value=""> - Marca - </option>
+                                        @foreach ($marcas as $m)
+                                            <option value="{{ $m->id }}">{{ $m->nome }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="mb-3 input-group">
+                                    <select class="form-select" name="modelo" aria-label="Selecione o Modelo">
+                                        <option value=""> - Modelo - </option>
+                                        @foreach ($equipaments as $e)
+                                            <option value="{{ $e->id }}">{{ $e->nome }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="mb-3 input-group">
+                                    <select class="form-select" name="instrumento" aria-label="Selecione o Instrumento">
+                                        <option value=""> - Instrumento - </option>
+                                        <option value="Guitarra">Guitarra</option>
+                                        <option value="Violão">Violão</option>
+                                        <option value="Baixo">Baixo</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-3 input-group">
+                                    <input type="text" class="form-control" placeholder="Busca" name="search" value="{{ request('search') }}">
+                                    <button class="btn btn-outline-secondary" type="submit" id="button-search">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
+
+
+
+
                 <div class="row g-8">
-                    <div class="col-md-4">
-                        <div class="border-0 card bd-card">
-                            <div class="card-body">
-                                <p>
-                                    <span class="text-warning small">Hotone Ampero 2 Stomp (v2.3.1)</span>
-                                </p>
-                                <div class="row">
-                                    <div class="col-2 text-end">
-                                        <div class="mb-4 rounded bd-w-12 bd-h-12 d-flex justify-content-center align-items-center">
-                                                    <img src="{{ asset('storage/profiles/edson.jpeg') }}" class="rounded-circle" width="40" height="40">
+                   @foreach ($presets as $p)
+
+                        {{-- inicio card --}}
+                            <div class=col-md-4>
+                                <div class="border-0 card bd-card">
+                                    <div class=card-body>
+                                        <p>
+                                            <span class="text-warning small">{{ $p->produto_nome }}</span>
+                                        </p>
+                                        <div class="row">
+                                            <div class="col-2 text-end">
+                                                <div class="mb-4 rounded bd-w-12 bd-h-12 d-flex justify-content-center align-items-center">
+                                                    @if(!empty($p->foto))
+                                                    <img src="{{ asset($p->foto) }}" class="rounded-circle" width="65" height="65">
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="col-10">
-                                                <span>edMaster1973</span>
+                                                <span>{{ $p->user_name }}</span>
                                                 <br>
-                                                <span class="text-body-secondary fs-xs">24 set 2025</span>
-                                            </div>
-                                        </div>
-                                        <h2 class="card-title h5 d-flex align-items-center">NCM Vitória</h2>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <img src="{{ asset('storage/images/p-vitoria.png') }}" class="h-auto w-100 rounded-3">
-                                            </div>
-                                            <div class="col-6">
-                                                <p class="text-body-tertiary fs-sm">
-                                                    Preset para música Vitória - NC Music (Novos Começos Niterói).
-                                                </p>
+                                                <small class="text-secondary fst-italic">{{ $p->total_seguidores }} seguidores</small>
                                             </div>
                                         </div>
 
+                                        <h2 class="card-title h5 d-flex align-items-center">{{ $p->nome }}</h2>
+
                                         <div class="row">
-                                            <p class="text-body-secondary fs-xs">
-                                                <span class="badge bg-primary">#Guitarra</span>
-                                                <span class="badge bg-secondary">#Pop</span>
-                                                <span class="badge bg-secondary">#Rock</span>
-                                            </p>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <p class="text-body-secondary fs-xs">
-                                                    1 Arquivo(s)
+                                            @if(!empty($p->img))
+                                                <div class="col-6">
+                                                    <img src="{{ asset($p->img) }}" class="h-auto w-100 rounded-3">
+                                                </div>
+                                                <div class="col-6">
+                                                    <p class="text-body-tertiary fs-sm">
+                                                        {{ $p->descricao }}
+                                                    </p>
+                                                    <p><span class="text-info small">{{ \Carbon\Carbon::parse($p->data)->format('d M Y') }}</span></p>
+                                                </div>
+                                            @else
+                                            <div class="col-12">
+                                                <p class="text-body-tertiary fs-sm">
+                                                    {{ $p->descricao }}
                                                 </p>
                                             </div>
-                                            <div class="col-6 text-end">
+                                            @endif
+                                        </div>
+
+                                        <br>
+
+                                        <div class="row">
+                                            <p class="text-body-secondary fs-xs">
+                                                <span class="badge bg-info">#{{ $p->instrumento }}</span>
+                                                @foreach ($styles as $style)
+                                                    @if($style->file_id == $p->id)
+                                                    <span class="badge bg-warning">#{{ $style->style }}</span>
+                                                    @endif
+                                                @endforeach
+                                            </p>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-12 text-end">
                                                 <p class="text-body-secondary fs-xs">
-                                                    <a href="#">Saiba Mais ></a>
+                                                    <a href="{{ route('saiba_mais',['file' => $p->id]) }}">Saiba Mais ></a>
                                                 </p>
                                             </div>
                                         </div>
 
                                         <hr>
 
-                                        <div class="row">
-                                            <div class="gap-2 col text-start">
+                                        <div class="gap-2 row">
+                                            <div class="col text-start">
+
                                                 <p class="text-body-secondary fs-xs">
-                                                    <i class="fa-solid fa-share-nodes"></i> 7
-                                                    <i class="fa-solid fa-comment"></i> 2
-                                                    <i class="fa-solid fa-thumbs-up"></i> 5
-                                                    <i class="fa-solid fa-download"></i> 79
+
+                                                    <i class="fa-solid fa-share-nodes"></i>
+                                                    <span class="text-info">{{ $p->total_shares }}</span>
+
+                                                    <i class="fa-solid fa-comment"></i>
+                                                    <span class="text-info">{{ $p->total_comments }}</span>
+
+                                                    <i class="fa-solid fa-heart"></i>
+                                                    <span class="text-info">{{ $p->total_likes }}</span>
+
+                                                    <i class="fa-solid fa-download"></i>
+                                                    <span class="text-info">{{ $p->total_downloads }}</span>
+
                                                 </p>
                                             </div>
                                             <div class="col text-end">
-                                                <button class="btn btn-primary">Download</button>
+                                                <form method="POST" action="{{ route('download.arquivos') }}">
+                                                    @csrf
+                                                    <input type="hidden" name="file_path" value="{{ $p->file_path }}">
+                                                    <input type="hidden" name="file_id" value="{{ $p->id }}">
+                                                    <button class="btn btn-sm btn-outline-primary" type="submit">
+                                                        Download
+                                                    </button>
+                                                </form>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
+                        {{-- fim card --}}
 
-                            <div class=col-md-4>
-                                <div class="border-0 card bd-card">
-                                    <div class=card-body>
-                                        <div class="mb-4 rounded bd-w-12 bd-h-12 d-flex justify-content-center align-items-center bd-icon-purple">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                        </div>
-                                        <h2 class="card-title h5 d-flex align-items-center">Quick Start</h2>
-                                        <p class="text-body-tertiary fs-sm">
-                                            Get started with FastBootstrap in no time.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class=col-md-4>
-                                <div class="border-0 card bd-card">
-                                    <div class=card-body>
-                                        <div class="mb-4 rounded bd-w-12 bd-h-12 d-flex justify-content-center align-items-center bd-icon-purple">
-                                            <i class="fa-solid fa-moon"></i>
-                                        </div>
-                                        <h2 class="card-title h5 d-flex align-items-center">
-                                            Dark Mode<span class="lozenge me-2 me-lg-4 text-uppercase fw-medium fs-xs new ms-auto">beta</span>
-                                        </h2>
-                                        <p class="text-body-tertiary fs-sm">Using our new dark mode on your site.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    @endforeach
+                </div>
 
                         <div class="mt-4 row g-8">
 
                             <div class=col-md-6>
                                 <div class="border-0 card bd-card h-100">
                                     <div class=card-body>
-                                        <div class="mb-4 rounded bd-w-12 bd-h-12 d-flex justify-content-center align-items-center bd-icon-purple">
-                                            <i class="fa-brands fa-js"></i>
+                                        <div class="mb-4 d-flex align-items-start">
+                                            <img src="{{ asset('storage/images/all-presets-logo.png') }}" alt="Logo All Presets" width="100" height="100">
                                         </div>
-                                        <h2 class="card-title h5 d-flex align-items-center">Javascript</h2>
+                                        <h2 class="card-title h5 d-flex align-items-center">O que nos move...</h2>
                                         <p class="text-body-tertiary fs-sm">
-                                            Bootstrap JS components implemented with TypeScript. Learn about each plugin, our data and programmatic API options, and more.
+                                            Nossa proposta vai além de compartilhamento de arquivos:
+                                            é sobre conectar pessoas, inspirar novas sonoridades e transformar experiências individuais em crescimento coletivo.
+                                        </p>
+                                        <span class="text-info">Seja você um iniciante explorando suas primeiras pedaleiras ou um músico experiente em busca de novas possibilidades, este é o seu espaço para:</span>
+                                        <p>
+                                            🎧 Descobrir presets criados por músicos profissionais <br>
+                                            📤 Compartilhar seus próprios timbres <br>
+                                            💬 Trocar experiências reais com quem vive o universo da música <br>
+                                            🤝 Seguir e interagir com outros membros da comunidade <br>
+                                            🚀 Evoluir seu som através da colaboração
                                         </p>
                                     </div>
                                 </div>
                             </div>
+
                             <div class=col-md-6>
                                 <div class="border-0 card bd-card h-100">
                                     <div class=card-body>
-                                        <div class="mb-4 rounded bd-w-12 bd-h-12 d-flex justify-content-center align-items-center bd-icon-purple">
-                                            <i class="fa-brands fa-js"></i>
+                                        <div class="mb-4 d-flex align-items-start">
+                                            <h1><i class="bi bi-emoji-heart-eyes-fill"></i></h1>
                                         </div>
-                                        <h2 class="card-title h5 d-flex align-items-center">Javascript</h2>
-                                        <p class="text-body-tertiary fs-sm">
-                                            Bootstrap JS components implemented with TypeScript. Learn about each plugin, our data and programmatic API options, and more.
+                                        <h2 class="card-title h5 d-flex align-items-center">Apoie este projeto!</h2>
+                                        <p class="text-body-tertiary fs-sm justify-items-stretch">
+                                            Nossa plataforma foi criada para ajudar músicos a compartilhar presets, trocar experiências e evoluir juntos. Mantê-la no ar envolve custos de servidores, manutenção e melhorias constantes.
+                                            Se este espaço tem sido útil para você, considere fazer uma doação e contribuir para que ele continue existindo e crescendo.
+                                            Sua ajuda faz toda a diferença! ❤️
+                                        </p>
+                                        <p>
+                                            {{-- criar um botão ou input copiável --}}
+                                            <div class="mb-4 d-flex align-items-start">
+                                                <img src="{{ asset('storage/images/qr-code-2.jpeg') }}" alt="QR Code" width="100" height="100">
+                                            </div>
+                                            <span class="fw-bold">Chave PIX para doações:</span>
+                                            <br>
+                                            <span class="text-info small">
+
+                                            </span>
+                                            {{-- inicio --}}
+                                            <div class="mb-3 input-group">
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    id="linkToCopy"
+                                                    value="00020126430014br.gov.bcb.pix0121ed_master@hotmail.com5204000053039865802BR5917EDSON ALVES FILHO6007NITEROI62070503***6304BE10"
+                                                    readonly
+                                                >
+
+                                                    <div class="input-group-append">
+                                                        <button
+                                                            class="btn btn-outline-secondary"
+                                                            type="button"
+                                                            id="copyButton"
+                                                            data-clipboard-target="#linkToCopy"
+                                                            title="Copiar para a Área de Transferência"
+                                                        >
+                                                            <i class="fas fa-copy"></i> Copiar
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <span id="copyFeedback" style="color: green; margin-left: 10px; display: none;">Copiado!</span>
+                                            {{-- fim --}}
                                         </p>
                                     </div>
                                 </div>
                             </div>
+
+
+
                         </div>
 
                     </div>
                 </div>
     </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const copyButton = document.getElementById('copyButton');
+        const feedbackElement = document.getElementById('copyFeedback');
+
+        if (copyButton) {
+            copyButton.addEventListener('click', function() {
+                // 1. Pega o ID do elemento alvo do atributo de dados
+                const targetId = this.getAttribute('data-clipboard-target').substring(1); // Remove o '#'
+                const targetElement = document.getElementById(targetId);
+
+                if (!targetElement) {
+                    console.error("Elemento alvo não encontrado.");
+                    return;
+                }
+
+                const textToCopy = targetElement.value || targetElement.textContent; // Pega o valor do input ou o texto de outro elemento
+
+                // 2. Tenta copiar usando a API Clipboard (Método preferido)
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(textToCopy)
+                        .then(() => {
+                            // 3. Sucesso: Exibe feedback visual
+                            feedbackElement.style.display = 'inline';
+                            setTimeout(() => {
+                                feedbackElement.style.display = 'none';
+                            }, 2000);
+                        })
+                        .catch(err => {
+                            console.error('Falha ao copiar usando API Clipboard: ', err);
+                            // Tenta o método de fallback (Seleção do DOM)
+                            fallbackCopyTextToClipboard(targetElement);
+                        });
+                } else {
+                    // 4. Se a API não estiver disponível (navegadores mais antigos, HTTP)
+                    fallbackCopyTextToClipboard(targetElement);
+                }
+            });
+        }
+
+        // Método de Fallback (Menos elegante, exige manipulação do DOM)
+        function fallbackCopyTextToClipboard(targetElement) {
+            let successful = false;
+            try {
+                // Apenas funciona com <input> ou <textarea>
+                targetElement.select();
+                document.execCommand('copy');
+                successful = true;
+            } catch (err) {
+                console.error('Falha ao usar execCommand: ', err);
+            }
+
+            if (successful) {
+                feedbackElement.style.display = 'inline';
+                setTimeout(() => {
+                    feedbackElement.style.display = 'none';
+                }, 2000);
+            } else {
+                alert('Não foi possível copiar o texto. Tente novamente.');
+            }
+        }
+    });
+    </script>
 
 @endsection

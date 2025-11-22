@@ -16,14 +16,23 @@
         <div class="px-0 mx-auto max-w-screen-lx px-md-0 px-lg-0 px-xl-0">
             <div class="px-12 my-8 px-md-12 px-lg-20 px-xl-20 ">
                 <div class="row g-8 itens-center justify-content-center">
+
                     <div class=col-md-12>
 
-                        <div class="text-center items-center gap-3 mb-4">
-                            <img src="{{ asset('storage/images/favicon.ico') }}" alt="">
+                        <div class="items-center gap-3 mb-4 text-center">
+                            <img src="{{ asset('images/all-presets-logo.png') }}" alt="Logo All Presets" width="75" height="75">
                         </div>
-                        <div class="text-center items-center gap-3 mb-4">
+                        <div class="items-center gap-3 mb-4 text-center">
                             <h5>Sign in • All Presets</h5>
                         </div>
+
+                        {{-- alert --}}
+                    @foreach ($errors->all() as $error)
+                    <div class="text-center alert alert-primary alert-dismissible fade show" role="alert">
+                        {{ $error }}.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endforeach
 
                         <div class="border-0 card bd-card">
                             <div class=card-body>
@@ -44,8 +53,14 @@
                                                     <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
                                                 </div>
                                             </div>
-
                                         </form>
+                                        <hr>
+                                        <div class="text-center">
+                                            {{-- link esqueci a senha --}}
+                                            <a href="{{ route('password.request') }}" style="text-decoration: none;">
+                                                <i class="bi bi-key"></i> Esqueci minha senha
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +85,6 @@
         </main>
 
     </div>
-
 
         <script>
         function getTheme(){

@@ -1,25 +1,80 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+<!doctype html>
+<html lang="pt-BR" data-bs-theme="dark">
+    <head>
+        <meta http-equiv="x-ua-compatible" content="IE=edge">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="shortcut icon" href="{{ asset('storage/images/favicon.ico') }}">
+        <title>All Presets</title>
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
+    <body>
+    <div class="bd-layout">
+
+        <main class=bd-main>
+
+        <div class="px-0 mx-auto max-w-screen-lx px-md-0 px-lg-0 px-xl-0">
+            <div class="px-12 my-8 px-md-12 px-lg-20 px-xl-20 ">
+                <div class="row g-8 itens-center justify-content-center">
+
+                    <div class=col-md-12>
+
+                        <div class="items-center gap-3 mb-4 text-center">
+                            <img src="{{ asset('images/all-presets-logo.png') }}" alt="Logo All Presets" width="75" height="75">
+                        </div>
+                        <div class="items-center gap-3 mb-4 text-center">
+                            <h5>Recuperar Senha • All Presets</h5>
+                        </div>
+
+                        {{-- alert --}}
+                    @foreach ($errors->all() as $error)
+                    <div class="text-center alert alert-primary alert-dismissible fade show" role="alert">
+                        {{ $error }}.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endforeach
+
+                        <div class="border-0 card bd-card">
+                            <div class=card-body>
+                                <div class="row">
+                                    <div class="col-12">
+
+                                        <form method="POST" action="{{ route('password.email') }}">
+                                            @csrf
+                                            <div class="mb-2 form-group">
+
+                                                <div class="gap-2 mb-3 row">
+                                                    <label class="text-primary">Informe seu E-mail</label>
+                                                    <input type="email" id="email" name="email" class="form-control" placeholder="E-mail" :value="old('email')" required autofocus>
+                                                </div>
+
+                                                <div class="gap-2 mb-3 row">
+                                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Enviar</button>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-center">
+                                <p class="text-body-tertiary fs-sm"> © {{ date('Y') }} All Presets • Todos os direitos reservados.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
-
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('password.email') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</body>
+</html>

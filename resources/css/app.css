@@ -1,8 +1,10 @@
 @import url("~bootstrap/bootstrap.min.css");
 @import "./style.css";
+@import "./button-up-top.css";
 @import url("~fastbootstrap/fastbootstrap.min.css");
-@import url("~bootstrap-icons/bootstrap-icons.min.css");
+/*@import url("~bootstrap-icons/bootstrap-icons.min.css");*/
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
 
 // theme based visibility
 #sunIcon {
