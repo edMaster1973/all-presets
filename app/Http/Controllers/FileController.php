@@ -94,6 +94,7 @@ class FileController extends Controller
         $downloads = $this->download->all();
         $marcas = $this->marca->all();
         $equipaments = $this->equipament->all();
+        $segments = $this->segment->all();
 
         return view('inicio', [
             'presets' => $presets,
@@ -104,6 +105,7 @@ class FileController extends Controller
             'downloads' => $downloads,
             'marcas' => $marcas,
             'equipaments' => $equipaments,
+            'segments' => $segments,
         ]);
     }
 
@@ -272,5 +274,38 @@ class FileController extends Controller
     {
         $link_file = $file->file_path;
         return back()->with('link_file', $link_file);
+    }
+
+    public function searchFiles(Request $request)
+    {
+        if ($request) {
+
+            $files = Consultas::file()
+                ->where('files.segment_id', $request->segment_id)
+                ->where('files.equipament_id', $request->equipament_id)
+                ->where('files.instrumento', 'like', $request->instrumento)
+                ->paginate(10);
+
+            $styles = Consultas::style();
+            $segments = $this->segment->all();
+            $likes = $this->like->all();
+            $shares = $this->share->all();
+            $comments = $this->comment->all();
+            $downloads = $this->download->all();
+            $marcas = $this->marca->all();
+            $equipaments = $this->equipament->all();
+
+            return view('inicio', [
+                'files' => $files,
+                'likes' => $likes,
+                'shares' => $shares,
+                'comments' => $comments,
+                'downloads' => $downloads,
+                'marcas' => $marcas,
+                'equipaments' => $equipaments,
+                'styles' => $styles,
+                'segments' => $segments,
+            ]);
+        }
     }
 }

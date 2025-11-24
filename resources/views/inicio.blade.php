@@ -35,16 +35,27 @@
             </div>
             @endforeach
 
+                    <form action="{{ route('search.files') }}" method="POST">
 
-
-                    <form action="#" method="POST">
                         @csrf
 
                         <div class="row g-8">
 
+                            {{-- Select segment_id --}}
                             <div class="col-md-2">
                                 <div class="mb-3 input-group">
-                                    <select class="form-select" name="marca" aria-label="Selecione a Marca">
+                                    <select class="form-select" id="segment" name="segment_id" aria-label="Selecione">
+                                        <option value=""> - Segmento - </option>
+                                        @foreach ($segments as $s)
+                                            <option value="{{ $s->id }}">{{ $s->nome }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="mb-3 input-group">
+                                    <select class="form-select" id="marca" name="marca_id" aria-label="Selecione a Marca">
                                         <option value=""> - Marca - </option>
                                         @foreach ($marcas as $m)
                                             <option value="{{ $m->id }}">{{ $m->nome }}</option>
@@ -55,11 +66,8 @@
 
                             <div class="col-md-2">
                                 <div class="mb-3 input-group">
-                                    <select class="form-select" name="modelo" aria-label="Selecione o Modelo">
-                                        <option value=""> - Modelo - </option>
-                                        @foreach ($equipaments as $e)
-                                            <option value="{{ $e->id }}">{{ $e->nome }}</option>
-                                        @endforeach
+                                    <select class="form-select" id="equipamento" name="equipament_id" aria-label="Selecione o Modelo">
+                                        <option> - Selecione - </option>
                                     </select>
                                 </div>
                             </div>
@@ -75,9 +83,9 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="mb-3 input-group">
-                                    <input type="text" class="form-control" placeholder="Busca" name="search" value="{{ request('search') }}">
+                                    {{-- <input type="text" class="form-control" placeholder="Busca" name="search" value="{{ request('search') }}"> --}}
                                     <button class="btn btn-outline-secondary" type="submit" id="button-search">
                                         <i class="fa-solid fa-magnifying-glass"></i>
                                     </button>
@@ -88,11 +96,120 @@
 
                     </form>
 
-
-
-
                 <div class="row g-8">
-                   @foreach ($presets as $p)
+
+                    @if(!empty($files))
+                    {{-- inicio search files --}}
+                    @foreach ($files as $f)
+                        {{-- inicio card files --}}
+                            <div class=col-md-4>
+                                <div class="border-0 card bd-card">
+                                    <div class=card-body>
+                                        <p>
+                                            <span class="text-warning small">{{ $f->produto_nome }}</span>
+                                        </p>
+                                        <div class="row">
+                                            <div class="col-2 text-end">
+                                                <div class="mb-4 rounded bd-w-12 bd-h-12 d-flex justify-content-center align-items-center">
+                                                    @if(!empty($f->foto))
+                                                    <img src="{{ asset($f->foto) }}" class="rounded-circle" width="65" height="65">
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-10">
+                                                <span>{{ $f->user_name }}</span>
+                                                <br>
+                                                <small class="text-secondary fst-italic">{{ $f->total_seguidores }} seguidores</small>
+                                            </div>
+                                        </div>
+
+                                        <h2 class="card-title h5 d-flex align-items-center">{{ $f->nome }}</h2>
+
+                                        <div class="row">
+                                            @if(!empty($f->img))
+                                                <div class="col-6">
+                                                    <img src="{{ asset($f->img) }}" class="h-auto w-100 rounded-3">
+                                                </div>
+                                                <div class="col-6">
+                                                    <p class="text-body-tertiary fs-sm">
+                                                        {{ $f->descricao }}
+                                                    </p>
+                                                    <p><span class="text-info small">{{ \Carbon\Carbon::parse($f->data)->format('d M Y') }}</span></p>
+                                                </div>
+                                            @else
+                                            <div class="col-12">
+                                                <p class="text-body-tertiary fs-sm">
+                                                    {{ $f->descricao }}
+                                                </p>
+                                            </div>
+                                            @endif
+                                        </div>
+
+                                        <br>
+
+                                        <div class="row">
+                                            <p class="text-body-secondary fs-xs">
+                                                <span class="badge bg-info">#{{ $f->instrumento }}</span>
+                                                @foreach ($styles as $style)
+                                                    @if($style->file_id == $f->id)
+                                                    <span class="badge bg-warning">#{{ $style->style }}</span>
+                                                    @endif
+                                                @endforeach
+                                            </p>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-12 text-end">
+                                                <p class="text-body-secondary fs-xs">
+                                                    <a href="{{ route('saiba_mais',['file' => $f->id]) }}">Saiba Mais ></a>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+
+                                        <div class="gap-2 row">
+                                            <div class="col text-start">
+
+                                                <p class="text-body-secondary fs-xs">
+
+                                                    <i class="fa-solid fa-share-nodes"></i>
+                                                    <span class="text-info">{{ $f->total_shares }}</span>
+
+                                                    <i class="fa-solid fa-comment"></i>
+                                                    <span class="text-info">{{ $f->total_comments }}</span>
+
+                                                    <i class="fa-solid fa-heart"></i>
+                                                    <span class="text-info">{{ $f->total_likes }}</span>
+
+                                                    <i class="fa-solid fa-download"></i>
+                                                    <span class="text-info">{{ $f->total_downloads }}</span>
+
+                                                </p>
+                                            </div>
+                                            <div class="col text-end">
+                                                <form method="POST" action="{{ route('download.arquivos') }}">
+                                                    @csrf
+                                                    <input type="hidden" name="file_path" value="{{ $f->file_path }}">
+                                                    <input type="hidden" name="file_id" value="{{ $f->id }}">
+                                                    <button class="btn btn-sm btn-outline-primary" type="submit">
+                                                        Download
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {{-- fim card --}}
+                    @endforeach
+
+                    {{-- fim search files --}}
+                    @endif
+
+                    @if (!empty($presets))
+                    {{-- inicio presets --}}
+                    @foreach ($presets as $p)
 
                         {{-- inicio card --}}
                             <div class=col-md-4>
@@ -197,6 +314,12 @@
                         {{-- fim card --}}
 
                     @endforeach
+                    {{-- fim presets --}}
+                    @endif
+
+
+
+
                 </div>
 
                         <div class="mt-4 row g-8">
@@ -345,6 +468,57 @@
                 alert('Não foi possível copiar o texto. Tente novamente.');
             }
         }
+    });
+    </script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        const selectMarca = document.getElementById('marca');
+        const selectEquipamento = document.getElementById('equipamento');
+
+        selectMarca.addEventListener('change', function() {
+
+            // Pega o ID da marca selecionada
+            const marcaId = this.value;
+
+            // Limpa a select de equipamento
+            selectEquipamento.innerHTML = '<option value="">Carregando...</option>';
+
+            if (marcaId) {
+
+                // Constrói a URL para a requisição AJAX
+                const url = `/equipaments/por-marca/${marcaId}`;
+
+                // 1. Faz a requisição AJAX (usando Fetch API)
+                fetch(url)
+                .then(response => response.json()) // 2. Transforma a resposta em JSON
+                .then(data => {
+
+                    // 3. Limpa e popula a select Equipamento
+                    selectEquipamento.innerHTML = '<option value="">Selecione o Equipamento</option>';
+
+                    if (data.length > 0) {
+
+                        data.forEach(equipamento => {
+                            const option = document.createElement('option');
+                            option.value = equipamento.id;
+                            option.textContent = equipamento.nome; // Supondo que a coluna seja 'nome'
+                            selectEquipamento.appendChild(option);
+                        });
+                    } else {
+                        selectEquipamento.innerHTML = '<option value="">Nenhum equipamento encontrado</option>';
+                    }
+                })
+                                    .catch(error => {
+                                        console.error('Erro ao buscar equipamentos:', error);
+                                        selectEquipamento.innerHTML = '<option value="">Erro ao carregar dados</option>';
+                                    });
+            } else {
+                // Se nenhuma marca for selecionada, reseta a select de equipamento
+                selectEquipamento.innerHTML = '<option value="">Selecione o Equipamento</option>';
+            }
+        });
     });
     </script>
 

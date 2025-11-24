@@ -63,6 +63,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/download/{share_id}', [App\Http\Controllers\ShareController::class, 'downloadFile'])->name('file.download.signed');
 
     Route::post('/user/{user}/follow', [App\Http\Controllers\FollowController::class, 'toggleFollow'])->name('user.follow');
+
+    Route::post('/search_files', [App\Http\Controllers\FileController::class, 'searchFiles'])->name('search.files');
 });
 
 Route::middleware('auth')->group(function () {
