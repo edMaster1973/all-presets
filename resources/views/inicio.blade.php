@@ -53,7 +53,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="mb-3 input-group">
                                     <select class="form-select" id="marca" name="marca_id" aria-label="Selecione a Marca">
                                         <option value=""> - Marca - </option>
@@ -64,7 +64,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="mb-3 input-group">
                                     <select class="form-select" id="equipamento" name="equipament_id" aria-label="Selecione o Modelo">
                                         <option> - Selecione - </option>
@@ -83,7 +83,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <div class="mb-3 input-group">
                                     {{-- <input type="text" class="form-control" placeholder="Busca" name="search" value="{{ request('search') }}"> --}}
                                     <button class="btn btn-outline-secondary" type="submit" id="button-search">
@@ -161,7 +161,7 @@
                                         <div class="row">
                                             <div class="col-12 text-end">
                                                 <p class="text-body-secondary fs-xs">
-                                                    <a href="{{ route('saiba_mais',['file' => $f->id]) }}">Saiba Mais ></a>
+                                                    <a href="{{ route('saiba_mais',['file' => $f->id]) }}" target="_blank">Saiba Mais ></a>
                                                 </p>
                                             </div>
                                         </div>
@@ -271,7 +271,7 @@
                                         <div class="row">
                                             <div class="col-12 text-end">
                                                 <p class="text-body-secondary fs-xs">
-                                                    <a href="{{ route('saiba_mais',['file' => $p->id]) }}">Saiba Mais ></a>
+                                                    <a href="{{ route('saiba_mais',['file' => $p->id]) }}" target="_blank">Saiba Mais ></a>
                                                 </p>
                                             </div>
                                         </div>

@@ -6,11 +6,11 @@
         <div class="px-0 max-w-screen-lx px-md-0 px-lg-0 px-xl-0">
             <div class="px-12 my-8 px-md-12 px-lg-20 px-xl-20">
 
-                <div class="mb-4 row">
+                {{-- <div class="mb-4 row">
                     <a href="{{ route('inicio') }}" style="text-decoration: none;">
                         <i class="bi bi-arrow-left-circle"></i> Voltar
                     </a>
-                </div>
+                </div> --}}
 
                 @foreach ($errors->all() as $error)
                 <div class="mb-4 g-8 row">
