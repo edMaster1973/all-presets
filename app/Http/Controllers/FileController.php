@@ -284,7 +284,7 @@ class FileController extends Controller
                 ->where('files.segment_id', $request->segment_id)
                 ->where('files.equipament_id', $request->equipament_id)
                 ->where('files.instrumento', 'like', $request->instrumento)
-                ->paginate(10);
+                ->paginate(20);
 
             $styles = Consultas::style();
             $segments = $this->segment->all();

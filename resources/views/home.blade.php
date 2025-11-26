@@ -130,9 +130,17 @@
                         {{-- fim card --}}
                         @endif
                     @endforeach
+
+                    <div class="row g-8">
+                        <div class="mt-3 items-center justify-content-center">
+                            <nav aria-label="Page navigation example">
+                                {{ $presets->links() }}
+                            </nav>
+                        </div>
+                    </div>
             </div>
 
-        <div class="mt-4 row g-8">
+            <div class="mt-4 row g-8">
                 <div class=col-md-12>
                     <div class="border-0 card bd-card h-100">
                         <div class=card-body>

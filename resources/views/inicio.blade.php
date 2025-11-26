@@ -102,6 +102,7 @@
                     {{-- inicio search files --}}
                     @foreach ($files as $f)
                         {{-- inicio card files --}}
+
                             <div class=col-md-4>
                                 <div class="border-0 card bd-card">
                                     <div class=card-body>
@@ -203,6 +204,14 @@
                             </div>
                         {{-- fim card --}}
                     @endforeach
+
+                    <div class="row g-8">
+                        <div class="mt-3 items-center justify-content-center">
+                            <nav aria-label="Page navigation example">
+                                {{ $files->links() }}
+                            </nav>
+                        </div>
+                    </div>
 
                     {{-- fim search files --}}
                     @endif
@@ -315,10 +324,16 @@
 
                     @endforeach
                     {{-- fim presets --}}
+
+                        <div class="row g-8">
+                            <div class="mt-3 items-center justify-content-center">
+                                <nav aria-label="Page navigation example">
+                                    {{ $presets->links() }}
+                                </nav>
+                            </div>
+                        </div>
+
                     @endif
-
-
-
 
                 </div>
 
