@@ -23,16 +23,13 @@
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav navbar-nav-underline ps-lg-5 flex-grow-1">
                         <li class=nav-item>
-                            <a class="nav-link {{ Route::is('home') ? 'active' : '' }}" href="{{ route('home') }}">Presets</a>
+                            <a class="nav-link {{ Route::is('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
                         </li>
                         <li class=nav-item>
-                            <a class="nav-link {{ Route::is('tones') ? 'active' : '' }}" href="{{ route('tones') }}">Tones</a>
+                            <a class="nav-link {{ Route::is('mais_baixados') ? 'active' : '' }}" href="{{ route('mais_baixados') }}">Mais Baixados</a>
                         </li>
                         <li class=nav-item>
-                            <a class="nav-link" href="#">IRs</a>
-                        </li>
-                        <li class=nav-item>
-                            <a class="nav-link" href="#">Clones</a>
+                            <a class="nav-link" href="#">Comentários</a>
                         </li>
                     </ul>
                 </div>

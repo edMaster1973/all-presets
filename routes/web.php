@@ -6,9 +6,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\FileController::class, 'home'])->name('home');
 
-Route::get('/tones', function () {
-    return view('tones');
-})->name('tones');
+Route::get('/mais_baixados', [App\Http\Controllers\FileController::class, 'mostDownloaded'])->name('mais_baixados');
+
+// Route::get('/tones', function () {
+//     return view('tones');
+// })->name('tones');
 
 Route::get('/logar', function () {
     return view('login');

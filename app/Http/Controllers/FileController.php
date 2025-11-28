@@ -109,6 +109,16 @@ class FileController extends Controller
         ]);
     }
 
+    public function mostDownloaded()
+    {
+        $files = Consultas::orderDownloads()->paginate(20);
+        $downloads = $this->download->all();
+        return view('mais_baixados', [
+            'files' => $files,
+            'downloads' => $downloads,
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      */
