@@ -77,9 +77,27 @@
                                 <div class="mb-4 row">
                                     <div class="col-6">
                                         <p class="text-body-secondary fs-xs">
-                                            <span class="badge bg-primary">#{{ $file->instrumento }}</span>
+
+                                            @switch($file->instrumento)
+
+                                                @case('Guitarra')
+                                                <span class="badge bg-primary">{{ $file->instrumento }}</span>
+                                                @break
+
+                                                @case('Violão')
+                                                <span class="badge bg-warning">{{ $file->instrumento }}</span>
+                                                @break
+
+                                                @case('Baixo')
+                                                <span class="badge bg-success">{{ $file->instrumento }}</span>
+                                                @break
+
+                                                @default
+
+                                            @endswitch
+
                                             @foreach ($styles as $style)
-                                                <span class="badge bg-warning">#{{ $style->style }}</span>
+                                                <span class="badge bg-secondary">{{ $style->style }}</span>
                                             @endforeach
                                         </p>
                                     </div>

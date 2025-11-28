@@ -107,7 +107,7 @@ class Consultas
                 'u.foto_perfil',
                 's.nome'
             )
-            ->paginate(3);
+            ->paginate(20);
     }
 
     public static function tone()

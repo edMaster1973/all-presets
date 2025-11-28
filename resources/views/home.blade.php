@@ -75,11 +75,29 @@
                                         <br>
 
                                         <div class="row">
-                                            <p class="text-body-secondary fs-xs">
-                                                <span class="badge bg-info">#{{ $p->instrumento }}</span>
+                                            <p class="text-body-secondary">
+                                                @switch($p->instrumento)
+                                                    @case('Guitarra')
+                                                    <span class="badge bg-info">{{ $p->instrumento }}</span>
+                                                    @break
+
+                                                    @case('Violão')
+                                                    <span class="badge bg-warning">{{ $p->instrumento }}</span>
+                                                    @break
+
+                                                    @case('Baixo')
+                                                    <span class="badge bg-success">{{ $p->instrumento }}</span>
+                                                    @break
+
+                                                    @default
+
+                                                @endswitch
+
                                                 @foreach ($styles as $style)
                                                     @if($style->file_id == $p->id)
-                                                        <span class="badge bg-warning">#{{ $style->style }}</span>
+                                                        <span class="badge bg-secondary">
+                                                            {{ $style->style }}
+                                                        </span>
                                                     @endif
                                                 @endforeach
                                             </p>
@@ -87,7 +105,7 @@
 
                                         <div class="row">
                                             <div class="col-12">
-                                                <p class="text-body-secondary fs-xs">
+                                                <p class="text-body-secondary">
                                                     {{ $p->tags }}
                                                 </p>
                                             </div>
@@ -95,15 +113,7 @@
 
                                         <hr>
 
-                                        @php
-                                        // contador compartilhamentos //
-                                        $downloadsCount=0;
-                                        foreach ($downloads as $download) {
-                                            if ($download->file_id == $p->id) {
-                                                $downloadsCount++;
-                                            }
-                                        }
-                                        @endphp
+
 
                                         <div class="gap-2 row">
                                             <div class="col text-start">
@@ -132,7 +142,7 @@
                     @endforeach
 
                     <div class="row g-8">
-                        <div class="mt-3 items-center justify-content-center">
+                        <div class="items-center mt-3 justify-content-center">
                             <nav aria-label="Page navigation example">
                                 {{ $presets->links() }}
                             </nav>

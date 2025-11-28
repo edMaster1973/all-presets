@@ -149,11 +149,24 @@
                                         <br>
 
                                         <div class="row">
-                                            <p class="text-body-secondary fs-xs">
-                                                <span class="badge bg-info">#{{ $f->instrumento }}</span>
+                                            <p class="text-body-secondary">
+
+                                                @switch($f->instrumento)
+                                                    @case('Guitarra')
+                                                    <span class="badge bg-info">{{ $f->instrumento }}</span>
+                                                    @break
+                                                    @case('Violão')
+                                                    <span class="badge bg-warning">{{ $f->instrumento }}</span>
+                                                    @break
+                                                    @case('Baixo')
+                                                    <span class="badge bg-success">{{ $f->instrumento }}</span>
+                                                    @break
+                                                    @default
+                                                @endswitch
+
                                                 @foreach ($styles as $style)
                                                     @if($style->file_id == $f->id)
-                                                    <span class="badge bg-warning">#{{ $style->style }}</span>
+                                                    <span class="badge bg-secondary">{{ $style->style }}</span>
                                                     @endif
                                                 @endforeach
                                             </p>
@@ -206,7 +219,7 @@
                     @endforeach
 
                     <div class="row g-8">
-                        <div class="mt-3 items-center justify-content-center">
+                        <div class="items-center mt-3 justify-content-center">
                             <nav aria-label="Page navigation example">
                                 {{ $files->links() }}
                             </nav>
@@ -225,7 +238,7 @@
                                 <div class="border-0 card bd-card">
                                     <div class=card-body>
                                         <p>
-                                            <span class="text-warning small">{{ $p->produto_nome }}</span>
+                                            <span class="fw-bold">{{ $p->segmento }}</span> <span class="text-warning small">{{ $p->produto_nome }}</span>
                                         </p>
                                         <div class="row">
                                             <div class="col-2 text-end">
@@ -267,11 +280,31 @@
                                         <br>
 
                                         <div class="row">
-                                            <p class="text-body-secondary fs-xs">
-                                                <span class="badge bg-info">#{{ $p->instrumento }}</span>
+                                            <p class="text-body-secondary">
+
+                                                @switch($p->instrumento)
+
+                                                    @case('Guitarra')
+                                                        <span class="badge bg-info">{{ $p->instrumento }}</span>
+                                                    @break
+
+                                                    @case('Violão')
+                                                        <span class="badge bg-warning">{{ $p->instrumento }}</span>
+                                                    @break
+
+                                                    @case('Violão')
+                                                        <span class="badge bg-success">{{ $p->instrumento }}</span>
+                                                    @break
+
+                                                    @default
+
+                                                @endswitch
+
                                                 @foreach ($styles as $style)
                                                     @if($style->file_id == $p->id)
-                                                    <span class="badge bg-warning">#{{ $style->style }}</span>
+                                                    <span class="badge bg-secondary">
+                                                        {{ $style->style }}
+                                                    </span>
                                                     @endif
                                                 @endforeach
                                             </p>
@@ -326,7 +359,7 @@
                     {{-- fim presets --}}
 
                         <div class="row g-8">
-                            <div class="mt-3 items-center justify-content-center">
+                            <div class="items-center mt-3 justify-content-center">
                                 <nav aria-label="Page navigation example">
                                     {{ $presets->links() }}
                                 </nav>
