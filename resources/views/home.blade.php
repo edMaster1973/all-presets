@@ -115,7 +115,7 @@
 
                                         <div class="gap-2 row">
                                             <div class="col text-start">
-                                                <p class="text-body-secondary fs-xs">
+                                                <p class="text-body-secondary">
 
                                                     <i class="fa-solid fa-share-nodes"></i>
                                                     <span class="text-info"> {{ $p->total_shares }}</span>

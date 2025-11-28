@@ -220,7 +220,7 @@
                             <div class="card-footer">
                                 <div class="row">
                                     <div class="col-12">
-                                        <p class="text-body-secondary fs-xs">
+                                        <p class="text-body-secondary">
                                             <i class="fa-solid fa-share-nodes"></i>
                                             <span class="text-info">{{ $total_shares }}</span>
                                             <i class="fa-solid fa-comment"></i>
