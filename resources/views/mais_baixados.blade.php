@@ -2,25 +2,6 @@
 
 @section('content')
 
-    {{-- <div class=bd-intro>
-        <div class="px-4 bd-bg-light px-md-6 px-lg-10 px-xl-20">
-            <div class="row g-0">
-                <div class="col-12 col-md-8 col-lg-6">
-                    <div class="py-4 py-md-6 py-lg-10 py-xl-20">
-                        <h1 class=mb-0>Presets</h1>
-                        <p class="mt-3 text-body-secondary">
-                            Bem-vindo à plataforma onde músicos se encontram, criam, compartilham e evoluem juntos.
-                            Aqui, cada preset enviado, cada comentário, cada curtida e cada troca de ideia ajuda a construir uma verdadeira comunidade de apaixonados por timbres e música.
-                        </p>
-                    </div>
-                </div>
-                <div class="d-none d-md-block col-md-4 col-lg-6">
-                    <img src="{{ asset('storage/images/img-fundo-3.png') }}" alt="Imagem de boas-vindas" width="640">
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
     <div class="bd-main-content">
 
         <div class="px-0 mx-auto max-w-screen-lx px-md-0 px-lg-0 px-xl-0">
