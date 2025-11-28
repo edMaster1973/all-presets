@@ -76,7 +76,7 @@
 
                                 <div class="mb-4 row">
                                     <div class="col-6">
-                                        <p class="text-body-secondary fs-xs">
+                                        <p class="text-body-secondary">
 
                                             @switch($file->instrumento)
 
@@ -102,7 +102,7 @@
                                         </p>
                                     </div>
                                     <div class="col-6 text-end">
-                                        <span class="float-end text-body-secondary fs-xs">
+                                        <span class="float-end text-body-secondary">
                                             <span class="fw-bold">Tags:</span> {{ $file->tags }}
                                         </span>
                                     </div>
@@ -151,8 +151,8 @@
                                             $i=0;
                                             foreach ($likes as $like){
                                                 if ($like->file_id == $file->id && $like->user_id == auth()->id()){
-                                                        $i=1;
-                                                        $like_id=$like->id;
+                                                    $i=1;
+                                                    $like_id=$like->id;
                                                 }
                                             }
                                         @endphp
@@ -239,7 +239,7 @@
 
                 @foreach ($comments as $comment)
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="border-0 card bd-card h-100">
                                 <div class="card-head">
                                     <div class="mb-4 row">
@@ -267,8 +267,12 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="mb-4 row text-end">
-                                        <div class="col-12">
+                                    <div class="mb-4 row">
+                                        <div class="col-6">
+                                            <a href="#"><i class="bi bi-hand-thumbs-up"></i></a> 0
+                                            <a href="#"><i class="bi bi-hand-thumbs-down"></i></a> 0
+                                        </div>
+                                        <div class="col-6 text-end">
                                             <span class="text-info small">{{ \Carbon\Carbon::parse($comment->created_at)->format('d M Y H:i:s') }}</span>
                                         </div>
                                     </div>

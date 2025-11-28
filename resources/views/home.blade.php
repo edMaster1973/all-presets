@@ -33,7 +33,7 @@
                                 <div class="border-0 card bd-card">
                                     <div class=card-body>
                                         <p>
-                                            <span class="text-warning small">{{ $p->produto_nome }}</span>
+                                            <span class="fw-bold">{{ $p->segmento }}</span> <span class="text-warning small">{{ $p->produto_nome }}</span>
                                         </p>
                                         <div class="row">
                                             <div class="col-2 text-end">
@@ -112,8 +112,6 @@
                                         </div>
 
                                         <hr>
-
-
 
                                         <div class="gap-2 row">
                                             <div class="col text-start">
