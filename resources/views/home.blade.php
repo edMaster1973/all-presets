@@ -201,7 +201,11 @@
                                     </div>
                                 </div>
 
-                                <span id="copyFeedback" style="color: green; margin-left: 10px; display: none;">Copiado!</span>
+                                <span
+                                id="copyFeedback"
+                                style="color: green; margin-left: 10px; display: none;">
+                                    Copiado!
+                                </span>
 
                                 {{-- fim --}}
                             </p>
@@ -211,69 +215,5 @@
 
         </div>
     </div>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const copyButton = document.getElementById('copyButton');
-        const feedbackElement = document.getElementById('copyFeedback');
-
-        if (copyButton) {
-            copyButton.addEventListener('click', function() {
-                // 1. Pega o ID do elemento alvo do atributo de dados
-                const targetId = this.getAttribute('data-clipboard-target').substring(1); // Remove o '#'
-                const targetElement = document.getElementById(targetId);
-
-                if (!targetElement) {
-                    console.error("Elemento alvo não encontrado.");
-                    return;
-                }
-
-                const textToCopy = targetElement.value || targetElement.textContent; // Pega o valor do input ou o texto de outro elemento
-
-                // 2. Tenta copiar usando a API Clipboard (Método preferido)
-                if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(textToCopy)
-                        .then(() => {
-                            // 3. Sucesso: Exibe feedback visual
-                            feedbackElement.style.display = 'inline';
-                            setTimeout(() => {
-                                feedbackElement.style.display = 'none';
-                            }, 2000);
-                        })
-                        .catch(err => {
-                            console.error('Falha ao copiar usando API Clipboard: ', err);
-                            // Tenta o método de fallback (Seleção do DOM)
-                            fallbackCopyTextToClipboard(targetElement);
-                        });
-                } else {
-                    // 4. Se a API não estiver disponível (navegadores mais antigos, HTTP)
-                    fallbackCopyTextToClipboard(targetElement);
-                }
-            });
-        }
-
-        // Método de Fallback (Menos elegante, exige manipulação do DOM)
-        function fallbackCopyTextToClipboard(targetElement) {
-            let successful = false;
-            try {
-                // Apenas funciona com <input> ou <textarea>
-                targetElement.select();
-                document.execCommand('copy');
-                successful = true;
-            } catch (err) {
-                console.error('Falha ao usar execCommand: ', err);
-            }
-
-            if (successful) {
-                feedbackElement.style.display = 'inline';
-                setTimeout(() => {
-                    feedbackElement.style.display = 'none';
-                }, 2000);
-            } else {
-                alert('Não foi possível copiar o texto. Tente novamente.');
-            }
-        }
-    });
-    </script>
 
 @endsection

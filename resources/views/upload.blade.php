@@ -182,7 +182,7 @@
         </div>
     </div>
 
-<script>
+{{-- <script>
 document.addEventListener('DOMContentLoaded', function() {
 
     const selectMarca = document.getElementById('marca');
@@ -231,6 +231,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-</script>
+</script> --}}
 
 @endsection
