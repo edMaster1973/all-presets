@@ -1,4 +1,4 @@
-@extends('master')
+@extends('master-auth')
 
 @section('content')
 
@@ -17,40 +17,37 @@
                             <thead>
                                 <tr>
                                     <th class="table-plus datatable-nosort">#</th>
-                                    <th>By</th>
                                     <th>Tipo</th>
-                                    <th>Equipamento</th>                                    
+                                    <th>Equipamento</th>
                                     <th>Arquivo</th>
+                                    <th>Privacidade</th>
                                     <th>Data</th>
                                     <th>Downloads</th>
+                                    <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($files as $f)
                                 <tr>
-                                    <td class="table-plus">
-                                        <img src="{{ $f->foto }}" alt="User Photo" width="50" class="rounded-circle">
-                                    </td>
+                                    <td class="table-plus">{{ $f->id }}</td>
                                     <td>
-                                        {{ $f->user_name }}
-                                        <br>
-                                        <span class="text-secondary">{{ $f->user_email }}</span>
-                                    </td>
-                                    <td class="text-info">
-                                        {{ $f->segmento }}
+                                        <span class="text-info">{{ $f->segmento }}</span>
                                         <br>
                                         <span class="text-secondary">{{ $f->instrumento }}</span>
                                     </td>
                                     <td class="text-secondary">{{ $f->produto_nome }}</td>
-                                    
                                     <td class="text-secondary">{{ $f->nome }}</td>
-
-                                    <td class="text-warning">
-                                        {{ \Carbon\Carbon::parse($f->data)->format('d M Y') }}
-                                        <br>
-                                        <span class="text-secondary">{{ \Carbon\Carbon::parse($f->data)->format('H:i:s') }}</span>
-                                    </td>
+                                    <td class="text-secondary">{{ $f->privacidade }}</td>
+                                    <td class="text-warning">{{ \Carbon\Carbon::parse($f->data)->format('d M Y') }}</td>
                                     <td> {{ $f->total_downloads ?? 0 }} </td>
+                                    <td class="text-end">
+                                        <button class="btn btn-sm btn-primary" title="Editar">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger" title="Excluir">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

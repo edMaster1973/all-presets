@@ -19,12 +19,27 @@
                 </a>
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav navbar-nav-underline ps-lg-5 flex-grow-1">
+
                         <li class=nav-item>
                             <a class="nav-link {{ Route::is('inicio') ? 'active' : '' }}" href="{{ route('inicio') }}">Início</a>
                         </li>
+
                         <li class=nav-item>
                             <a class="nav-link {{ Route::is('ranking') ? 'active' : '' }}" href="{{ route('ranking') }}">Ranking</a>
                         </li>
+
+                        <li class=nav-item>
+                            <a class="nav-link {{ Route::is('recomendados') ? 'active' : '' }}" href="{{ route('recomendados') }}">Recomendados</a>
+                        </li>
+
+                        <li class=nav-item>
+                            <a class="nav-link {{ Route::is('historico') ? 'active' : '' }}" href="{{ route('historico') }}">Histórico</a>
+                        </li>
+
+                        <li class=nav-item>
+                            <a class="nav-link {{ Route::is('meus_arquivos') ? 'active' : '' }}" href="{{ route('meus_arquivos') }}">Meus Arquivos</a>
+                        </li>
+
                     </ul>
                 </div>
                 <div class="gap-3 d-flex align-items-center ms-auto me-2 me-lg-3">

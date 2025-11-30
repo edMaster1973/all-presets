@@ -34,6 +34,7 @@ class Consultas
                 'e.nome as produto_nome',
                 'e.id as produto_id',
                 'e.descricao as produto_descricao',
+                'u.id as user_id',
                 'u.name as user_name',
                 'u.email as user_email',
                 'u.foto_perfil as foto',
@@ -44,7 +45,6 @@ class Consultas
                 DB::raw('COUNT(DISTINCT l.id) as total_likes'),
                 DB::raw('COUNT(DISTINCT uf.follower_id) as total_seguidores')
             )
-            ->where('files.privacidade', 'publico')
             ->groupBy(
                 'files.id',
                 'files.nome',
@@ -53,6 +53,7 @@ class Consultas
                 'e.nome',
                 'e.id',
                 'e.descricao',
+                'u.id',
                 'u.name',
                 'u.email',
                 'u.foto_perfil',
@@ -151,14 +152,46 @@ class Consultas
 
     public static function download()
     {
-        // retornar total de downloads por arquivo //
         return Download::query()
+            ->join('files as f', 'f.id', '=', 'downloads.file_id')
+            ->join('users as u', 'u.id', '=', 'f.user_id')
+            ->join('segments as s', 's.id', '=', 'f.segment_id')
+            ->join('equipaments as e', 'e.id', '=', 'f.equipament_id')
             ->select(
-                'file_id',
-                DB::raw('COUNT(*) as total_downloads')
+                'downloads.id',
+                'downloads.downloaded_at',
+                'u.id as user_id',
+                'u.name as user_name',
+                'u.email as user_email',
+                'u.foto_perfil as user_foto',
+                'f.nome as file_name',
+                'f.descricao as file_description',
+                'f.id as file_id',
+                'f.instrumento as instrumento',
+                'f.created_at as file_date',
+                'e.nome as produto_nome',
+                'e.id as produto_id',
+                'e.descricao as produto_descricao',
+                's.nome as segmento'
             )
-            ->groupBy('file_id')
-            ->orderByDesc('total_downloads');
+            ->groupBy(
+                'file_id',
+                'downloads.id',
+                'downloads.downloaded_at',
+                'u.id',
+                'u.name',
+                'u.email',
+                'u.foto_perfil',
+                'f.nome',
+                'f.descricao',
+                'f.id',
+                'f.created_at',
+                'f.instrumento',
+                'e.nome',
+                'e.id',
+                'e.descricao',
+                's.nome'
+            );
     }
 
     public static function comment()
@@ -204,6 +237,7 @@ class Consultas
                 'e.nome as produto_nome',
                 'e.id as produto_id',
                 'e.descricao as produto_descricao',
+                'u.id as user_id',
                 'u.name as user_name',
                 'u.email as user_email',
                 'u.foto_perfil as foto',
@@ -223,6 +257,7 @@ class Consultas
                 'e.nome',
                 'e.id',
                 'e.descricao',
+                'u.id',
                 'u.name',
                 'u.email',
                 'u.foto_perfil',

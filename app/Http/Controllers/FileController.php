@@ -68,15 +68,13 @@ class FileController extends Controller
 
     public function home()
     {
-        $presets = Consultas::preset();
-        $files = Consultas::file()->paginate(20);
+        $files = Consultas::file()->where('privacidade', 'LIKE', 'publico')->paginate(20);
         $styles = Consultas::style()->get();
         $likes = $this->like->all();
         $shares = $this->share->all();
         $comments = $this->comment->all();
         $downloads = $this->download->all();
         return view('home', [
-            'presets' => $presets,
             'files' => $files,
             'styles' => $styles,
             'likes' => $likes,
@@ -88,7 +86,7 @@ class FileController extends Controller
 
     public function inicio()
     {
-        $files = Consultas::file()->paginate(20);
+        $files = Consultas::file()->where('privacidade', 'LIKE', 'publico')->paginate(20);
         $styles = Consultas::style()->get();
         $likes = $this->like->all();
         $shares = $this->share->all();
@@ -122,6 +120,27 @@ class FileController extends Controller
         ]);
     }
 
+    public function filesUser()
+    {
+        $files = Consultas::file()->where('files.user_id', auth()->user()->id)->get();
+
+        return view('meus_arquivos', [
+            'files' => $files
+        ]);
+    }
+
+    public function historyDownloads()
+    {
+        $downloads = Consultas::download()
+            ->where('downloads.user_id', auth()->user()->id)
+            ->orderBy('downloads.downloaded_at', 'desc')
+            ->get();
+
+        return view('historico', [
+            'downloads' => $downloads,
+        ]);
+    }
+
     public function mostDownloaded()
     {
         $files = Consultas::orderDownloads()->paginate(20);
@@ -129,6 +148,18 @@ class FileController extends Controller
         return view('mais_baixados', [
             'files' => $files,
             'downloads' => $downloads,
+        ]);
+    }
+
+    public function recomendados()
+    {
+        $files = Consultas::file()
+            ->where('files.privacidade', 'LIKE', 'publico')
+            ->where('uf.follower_id', auth()->user()->id)
+            ->get();
+
+        return view('recomendados', [
+            'files' => $files,
         ]);
     }
 

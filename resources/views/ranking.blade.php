@@ -17,9 +17,9 @@
                             <thead>
                                 <tr>
                                     <th class="table-plus datatable-nosort">#</th>
+                                    <th>By</th>
                                     <th>Tipo</th>
-                                    <th>Produto</th>
-                                    <th>Usuário</th>
+                                    <th>Equipamento</th>
                                     <th>Arquivo</th>
                                     <th>Data</th>
                                     <th>Downloads</th>
@@ -28,10 +28,20 @@
                             <tbody>
                                 @foreach ($files as $f)
                                 <tr>
-                                    <td class="table-plus">{{ $f->id }}</td>
-                                    <td class="text-info">{{ $f->segmento }}</td>
+                                    <td class="table-plus">
+                                        <img src="{{ $f->foto }}" alt="User Photo" width="50" class="rounded-circle">
+                                    </td>
+                                    <td>
+                                        {{ $f->user_name }}
+                                        <br>
+                                        <span class="text-secondary">{{ $f->user_email }}</span>
+                                    </td>
+                                    <td class="text-info">
+                                        {{ $f->segmento }}
+                                        <br>
+                                        <span class="text-secondary">{{ $f->instrumento }}</span></td>
                                     <td class="text-secondary">{{ $f->produto_nome }}</td>
-                                    <td class="text-secondary">{{ $f->user_name }}</td>
+
                                     <td class="text-secondary">{{ $f->nome }}</td>
                                     <td class="text-warning">{{ \Carbon\Carbon::parse($f->data)->format('d M Y') }}</td>
                                     <td> {{ $f->total_downloads ?? 0 }} </td>

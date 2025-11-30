@@ -28,6 +28,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/ranking', [App\Http\Controllers\FileController::class, 'ranking'])->name('ranking');
 
+    Route::get('/meus_arquivos', [App\Http\Controllers\FileController::class, 'filesUser'])->name('meus_arquivos');
+
+    Route::get('/historico', [App\Http\Controllers\FileController::class, 'historyDownloads'])->name('historico');
+
+    Route::get('/recomendados', [App\Http\Controllers\FileController::class, 'recomendados'])->name('recomendados');
+
     Route::get('/meus_dados', function () {
         return view('meus_dados');
     })->name('meus_dados');
