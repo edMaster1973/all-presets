@@ -26,47 +26,46 @@
             <div class="px-12 my-8 px-md-12 px-lg-20 px-xl-20 ">
                 <div class="row g-8">
 
-                    @foreach ($presets as $p)
-                        @if($p->privacidade == 'publico')
+                    @foreach ($files as $f)
+                        @if($f->privacidade == 'publico')
                         {{-- inicio card --}}
                             <div class=col-md-4>
                                 <div class="border-0 card bd-card">
                                     <div class=card-body>
                                         <p>
-                                            <span class="fw-bold">{{ $p->segmento }}</span> <span class="text-warning small">{{ $p->produto_nome }}</span>
+                                            <span class="fw-bold">{{ $f->segmento }}</span> <span class="text-warning small">{{ $f->produto_nome }}</span>
                                         </p>
                                         <div class="row">
                                             <div class="col-2 text-end">
                                                 <div class="mb-4 rounded bd-w-12 bd-h-12 d-flex justify-content-center align-items-center">
-                                                    @if(!empty($p->foto))
-                                                        <img src="{{ asset($p->foto) }}" class="rounded-circle" width="40" height="40">
+                                                    @if(!empty($f->foto))
+                                                        <img src="{{ asset($f->foto) }}" class="rounded-circle" width="40" height="40">
                                                     @endif
                                                 </div>
                                             </div>
                                             <div class="col-10">
-                                                <span>{{ $p->user_name }}</span>
+                                                <span>{{ $f->user_name }}</span>
                                                 <br>
                                             {{-- exibir data no formato dia mes_abreviado ano --}}
-                                                <span class="text-info small">{{ \Carbon\Carbon::parse($p->data)->format('d M Y') }}</span>
+                                                <span class="text-info small">{{ \Carbon\Carbon::parse($f->data)->format('d M Y') }}</span>
                                             </div>
                                         </div>
 
-                                        <h2 class="card-title h5 d-flex align-items-center">{{ $p->nome }}</h2>
-
+                                        <h2 class="card-title h5 d-flex align-items-center">{{ $f->nome }}</h2>
                                         <div class="row">
-                                            @if(!empty($p->img))
+                                            @if(!empty($f->img))
                                                 <div class="col-6">
-                                                    <img src="{{ asset($p->img) }}" class="h-auto w-100 rounded-3">
+                                                    <img src="{{ asset($f->img) }}" class="h-auto w-100 rounded-3">
                                                 </div>
                                                 <div class="col-6">
                                                     <p class="text-body-tertiary fs-sm">
-                                                        {{ $p->descricao }}
+                                                        {{ $f->descricao }}
                                                     </p>
                                                 </div>
                                             @else
                                                 <div class="col-12">
                                                     <p class="text-body-tertiary fs-sm">
-                                                        {{ $p->descricao }}
+                                                        {{ $f->descricao }}
                                                     </p>
                                                 </div>
                                             @endif
@@ -76,27 +75,27 @@
 
                                         <div class="row">
                                             <p class="text-body-secondary">
-                                                @switch($p->instrumento)
+                                                @switch($f->instrumento)
                                                     @case('Guitarra')
-                                                    <span class="badge bg-info">{{ $p->instrumento }}</span>
+                                                    <span class="badge bg-info">{{ $f->instrumento }}</span>
                                                     @break
 
                                                     @case('Violão')
-                                                    <span class="badge bg-warning">{{ $p->instrumento }}</span>
+                                                    <span class="badge bg-warning">{{ $f->instrumento }}</span>
                                                     @break
 
                                                     @case('Baixo')
-                                                    <span class="badge bg-success">{{ $p->instrumento }}</span>
+                                                    <span class="badge bg-success">{{ $f->instrumento }}</span>
                                                     @break
 
                                                     @default
 
                                                 @endswitch
 
-                                                @foreach ($styles as $style)
-                                                    @if($style->file_id == $p->id)
+                                                @foreach ($styles as $s)
+                                                    @if($s->file_id == $f->id)
                                                         <span class="badge bg-secondary">
-                                                            {{ $style->style }}
+                                                            {{ $s->style }}
                                                         </span>
                                                     @endif
                                                 @endforeach
@@ -106,7 +105,7 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <p class="text-body-secondary">
-                                                    {{ $p->tags }}
+                                                    {{ $f->tags }}
                                                 </p>
                                             </div>
                                         </div>
@@ -118,16 +117,16 @@
                                                 <p class="text-body-secondary">
 
                                                     <i class="fa-solid fa-share-nodes"></i>
-                                                    <span class="text-info"> {{ $p->total_shares }}</span>
+                                                    <span class="text-info"> {{ $f->total_shares }}</span>
 
                                                     <i class="fa-solid fa-comment"></i>
-                                                    <span class="text-info">{{ $p->total_comments }}</span>
+                                                    <span class="text-info">{{ $f->total_comments }}</span>
 
                                                     <i class="fa-solid fa-heart"></i>
-                                                    <span class="text-info">{{ $p->total_likes }}</span>
+                                                    <span class="text-info">{{ $f->total_likes }}</span>
 
                                                     <i class="fa-solid fa-download"></i>
-                                                    <span class="text-info">{{ $p->total_downloads }}</span>
+                                                    <span class="text-info">{{ $f->total_downloads }}</span>
 
                                                 </p>
                                             </div>
@@ -142,78 +141,10 @@
                     <div class="row g-8">
                         <div class="items-center mt-3 justify-content-center">
                             <nav aria-label="Page navigation example">
-                                {{ $presets->links() }}
+                                {{ $files->links() }}
                             </nav>
                         </div>
                     </div>
             </div>
-
-            <div class="mt-4 row g-8">
-                <div class=col-md-12>
-                    <div class="border-0 card bd-card h-100">
-                        <div class=card-body>
-                            <div class="mb-4 align-items-start d-flex">
-                                <h1><i class="bi bi-emoji-heart-eyes-fill"></i></h1>
-                            </div>
-                            <div class="text-center">
-                                <h2 class="card-title h5 d-flex align-items-center">
-                                    Ajude a manter esta comunidade viva!
-                                </h2>
-                            </div>
-                            <p class="text-body-tertiary fs-sm">
-                                Esta plataforma nasceu do desejo de criar um espaço onde músicos pudessem compartilhar presets, descobrir novos timbres e se conectar com outros apaixonados por música.
-                                Todo o conteúdo que você encontra aqui — uploads, downloads, comentários, curtidas, seguidores, tudo — acontece graças a uma comunidade ativa e a um sistema que exige dedicação e custos mensais para continuar funcionando.
-
-                                Se este projeto já te ajudou de alguma forma, considere contribuir com uma doação.
-                                Qualquer valor, por menor que seja, ajuda no pagamento de servidores, melhorias, segurança e novas funcionalidades.
-
-                                Seu apoio mantém este sonho de pé. Obrigado por fazer parte disso! 🎸✨
-                            </p>
-                            <div class="mb-4 justify-content-center align-items-center d-flex">
-                                <img src="{{ asset('storage/images/qr-code-2.jpeg') }}" alt="QR Code" width="120">
-                            </div>
-                            <p>
-                                <span class="fw-bold">Chave PIX para doações:</span>
-                                <br>
-                                <span class="text-info small">
-
-                                </span>
-                                {{-- inicio --}}
-                                <div class="mb-3 input-group">
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        id="linkToCopy"
-                                        value="00020126430014br.gov.bcb.pix0121ed_master@hotmail.com5204000053039865802BR5917EDSON ALVES FILHO6007NITEROI62070503***6304BE10"
-                                        readonly
-                                    >
-
-                                    <div class="input-group-append">
-                                        <button
-                                            class="btn btn-outline-secondary"
-                                            type="button"
-                                            id="copyButton"
-                                            data-clipboard-target="#linkToCopy"
-                                            title="Copiar para a Área de Transferência"
-                                        >
-                                            <i class="fas fa-copy"></i> Copiar
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <span
-                                id="copyFeedback"
-                                style="color: green; margin-left: 10px; display: none;">
-                                    Copiado!
-                                </span>
-
-                                {{-- fim --}}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-        </div>
-    </div>
 
 @endsection

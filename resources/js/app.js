@@ -123,3 +123,40 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+// script botão voltar ao topo //
+document.addEventListener('DOMContentLoaded', function() {
+        const scrollBtn = document.getElementById('scrollToTopBtn');
+
+        // 1. Mostrar/Esconder o botão ao rolar a página
+        window.onscroll = function() {
+            // Verifica se a rolagem vertical (scrollY) é maior que 200 pixels
+            if (window.scrollY > 200) {
+                scrollBtn.classList.add('show');
+            } else {
+                scrollBtn.classList.remove('show');
+            }
+        };
+
+        // 2. Comportamento ao clicar no botão
+        scrollBtn.onclick = function() {
+            // Utiliza o método scrollTo com o objeto de opções
+            window.scrollTo({
+                top: 0, // Define o destino da rolagem para o topo (0px)
+                behavior: 'smooth' // Faz a rolagem de forma suave (animada)
+            });
+        };
+        });
+
+        // script alternar modo claro/escuro //
+        function getTheme(){
+            return localStorage.getItem('theme') || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+            );
+        }
+        document.getElementById("themeToggle").addEventListener("click", function(){
+            const currentTheme = getTheme();
+            const newTheme = currentTheme === "dark" ? "light" : "dark";
+            document.documentElement.setAttribute("data-bs-theme", newTheme);
+            localStorage.setItem("theme", newTheme);
+        });
+        document.documentElement.setAttribute("data-bs-theme", getTheme());
+

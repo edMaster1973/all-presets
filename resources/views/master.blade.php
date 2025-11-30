@@ -26,18 +26,11 @@
                             <a class="nav-link {{ Route::is('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
                         </li>
                         <li class=nav-item>
-                            <a class="nav-link {{ Route::is('mais_baixados') ? 'active' : '' }}" href="{{ route('mais_baixados') }}">Mais Baixados</a>
-                        </li>
-                        <li class=nav-item>
-                            <a class="nav-link" href="#">Comentários</a>
+                            <a class="nav-link {{ Route::is('mais_baixados') ? 'active' : '' }}" href="{{ route('mais_baixados') }}">Em Alta</a>
                         </li>
                     </ul>
                 </div>
                 <div class="gap-3 d-flex align-items-center ms-auto me-2 me-lg-3">
-
-                    {{-- <div class=position-relative>
-                        <button class="btn btn-primary">Upload</button>
-                    </div> --}}
 
                     <div class=position-relative>
                         <a href="{{ route('entrar') }}" class="link" style="text-decoration: none;">
@@ -134,9 +127,78 @@
 
             @yield('content')
 
+            {{-- mensagem pix doação --}}
+            <div class="mt-4 row g-8">
+                <div class=col-md-12>
+                    <div class="border-0 card bd-card h-100">
+                        <div class=card-body>
+                            <div class="mb-4 align-items-start d-flex">
+                                <h1><i class="bi bi-emoji-heart-eyes-fill"></i></h1>
+                            </div>
+                            <div class="text-center">
+                                <h2 class="card-title h5 d-flex align-items-center">
+                                    Ajude a manter esta comunidade viva!
+                                </h2>
+                            </div>
+                            <p class="text-body-tertiary fs-sm">
+                                Esta plataforma nasceu do desejo de criar um espaço onde músicos pudessem compartilhar presets, descobrir novos timbres e se conectar com outros apaixonados por música.
+                                Todo o conteúdo que você encontra aqui — uploads, downloads, comentários, curtidas, seguidores, tudo — acontece graças a uma comunidade ativa e a um sistema que exige dedicação e custos mensais para continuar funcionando.
+
+                                Se este projeto já te ajudou de alguma forma, considere contribuir com uma doação.
+                                Qualquer valor, por menor que seja, ajuda no pagamento de servidores, melhorias, segurança e novas funcionalidades.
+
+                                Seu apoio mantém este sonho de pé. Obrigado por fazer parte disso! 🎸✨
+                            </p>
+                            <div class="mb-4 justify-content-center align-items-center d-flex">
+                                <img src="{{ asset('storage/images/qr-code-2.jpeg') }}" alt="QR Code" width="120">
+                            </div>
+                            <p>
+                                <span class="fw-bold">Chave PIX para doações:</span>
+                                <br>
+                                <span class="text-info small">
+
+                                </span>
+                                {{-- inicio --}}
+                                <div class="mb-3 input-group">
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="linkToCopy"
+                                        value="00020126430014br.gov.bcb.pix0121ed_master@hotmail.com5204000053039865802BR5917EDSON ALVES FILHO6007NITEROI62070503***6304BE10"
+                                        readonly
+                                    >
+
+                                    <div class="input-group-append">
+                                        <button
+                                            class="btn btn-outline-secondary"
+                                            type="button"
+                                            id="copyButton"
+                                            data-clipboard-target="#linkToCopy"
+                                            title="Copiar para a Área de Transferência"
+                                        >
+                                            <i class="fas fa-copy"></i> Copiar
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <span
+                                id="copyFeedback"
+                                style="color: green; margin-left: 10px; display: none;">
+                                    Copiado!
+                                </span>
+
+                                {{-- fim --}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+        {{-- fim mensagem pix doação --}}
+
             <div class="footer">
                 <div class="container">
-                    <div class="row">
+                    <div class="mt-4 row g-8">
                         <div class="col-md-12">
                             <div class="text-center">
                                 <p class="text-body-tertiary fs-sm"> © {{ date('Y') }} All Presets • Todos os direitos reservados.</p>
@@ -146,8 +208,6 @@
                 </div>
             </div>
 
-
-
         </div>
 
         </main>
@@ -155,45 +215,6 @@
     </div>
 
     <button id="scrollToTopBtn" title="Voltar ao Topo" class="back-to-top btn btn-primary">&#8679;</button>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-        const scrollBtn = document.getElementById('scrollToTopBtn');
-
-        // 1. Mostrar/Esconder o botão ao rolar a página
-        window.onscroll = function() {
-            // Verifica se a rolagem vertical (scrollY) é maior que 200 pixels
-            if (window.scrollY > 200) {
-                scrollBtn.classList.add('show');
-            } else {
-                scrollBtn.classList.remove('show');
-            }
-        };
-
-        // 2. Comportamento ao clicar no botão
-        scrollBtn.onclick = function() {
-            // Utiliza o método scrollTo com o objeto de opções
-            window.scrollTo({
-                top: 0, // Define o destino da rolagem para o topo (0px)
-                behavior: 'smooth' // Faz a rolagem de forma suave (animada)
-            });
-        };
-        });
-    </script>
-
-    <script>
-        function getTheme(){
-            return localStorage.getItem('theme') || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
-            );
-        }
-        document.getElementById("themeToggle").addEventListener("click", function(){
-            const currentTheme = getTheme();
-            const newTheme = currentTheme === "dark" ? "light" : "dark";
-            document.documentElement.setAttribute("data-bs-theme", newTheme);
-            localStorage.setItem("theme", newTheme);
-        });
-        document.documentElement.setAttribute("data-bs-theme", getTheme());
-    </script>
 
 </body>
 </html>

@@ -26,9 +26,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/inicio', [App\Http\Controllers\FileController::class, 'inicio'])->name('inicio');
 
-    // Route::get('/inicio', function () {
-    //     return view('inicio');
-    // })->name('inicio');
+    Route::get('/ranking', [App\Http\Controllers\FileController::class, 'ranking'])->name('ranking');
 
     Route::get('/meus_dados', function () {
         return view('meus_dados');

@@ -106,7 +106,7 @@
 
             <div class="footer">
                 <div class="container">
-                    <div class="row">
+                    <div class="mt-4 row">
                         <div class="col-md-12">
                             <div class="text-center">
                                 <p class="text-body-tertiary fs-sm"> © {{ date('Y') }} All Presets • Todos os direitos reservados.</p>
@@ -119,20 +119,6 @@
         </main>
 
     </div>
-
-    <script>
-        function getTheme(){
-            return localStorage.getItem('theme') || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
-            );
-        }
-        document.getElementById("themeToggle").addEventListener("click", function(){
-            const currentTheme = getTheme();
-            const newTheme = currentTheme === "dark" ? "light" : "dark";
-            document.documentElement.setAttribute("data-bs-theme", newTheme);
-            localStorage.setItem("theme", newTheme);
-        });
-        document.documentElement.setAttribute("data-bs-theme", getTheme());
-    </script>
 
 </body>
 </html>

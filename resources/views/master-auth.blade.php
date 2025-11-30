@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="pt-BR" data-bs-theme="dark">
-    <head>
+<head>
         <meta http-equiv="x-ua-compatible" content="IE=edge">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <link rel="shortcut icon" href="{{ asset('storage/images/favicon.ico') }}" >
         <title>All Presets</title>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body>
+</head>
+<body>
         <header class="py-0 navbar navbar-expand-lg sticky-top bd-navbar">
             <nav class="container-fluid px-md-3 px-lg-4">
                 <a class="p-0 p-1 m-0 rounded navbar-brand d-inline-flex align-items-center me-lg-6 me-xl-9 text-reset" href="/">
@@ -23,16 +23,7 @@
                             <a class="nav-link {{ Route::is('inicio') ? 'active' : '' }}" href="{{ route('inicio') }}">Início</a>
                         </li>
                         <li class=nav-item>
-                            <a class="nav-link" href="#">Presets</a>
-                        </li>
-                        <li class=nav-item>
-                            <a class="nav-link" href="#">Tones</a>
-                        </li>
-                        <li class=nav-item>
-                            <a class="nav-link" href="#">IRs</a>
-                        </li>
-                        <li class=nav-item>
-                            <a class="nav-link" href="#">Clones</a>
+                            <a class="nav-link {{ Route::is('ranking') ? 'active' : '' }}" href="{{ route('ranking') }}">Ranking</a>
                         </li>
                     </ul>
                 </div>
@@ -44,21 +35,37 @@
                         </a>
                     </div>
 
-                    <div class=position-relative>
+                    <div class="position-relative">
                         <button class="border-0 btn" id="themeToggle">
                             <i class="bi bi-brightness-high" id="sunIcon"></i>
                             <i class="bi bi-moon-stars" id="moonIcon"></i>
                         </button>
                     </div>
 
-                    <button id="search-button" class="py-1 bg-transparent border border-2 fs-sm text-body-secondary rounded-2 bd-w-56 text-start ps-2 d-none d-lg-block" type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
-                        <i class="fa fa-search"></i>
-                        <span>Search</span>
-                    </button>
+                    <div class="position-relative">
+                        <button class="border-0 btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-bell"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                            <li>
+                                <div class="items-center pt-3 pb-2">
+                                    <span class="dropdown-item-text">#1. Notification</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="items-center pt-3 pb-2">
+                                    <span class="dropdown-item-text">#2. Notification</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="items-center pt-3 pb-2">
+                                    <span class="dropdown-item-text">#3. Notification</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
 
-                    <button class="btn d-lg-none" type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
-                        <i class="fa fa-search"></i>
-                    </button>
+
 
                     @if(!empty(Auth::user()->foto_perfil))
                         <img src="{{ asset(Auth::user()->foto_perfil) }}" class="rounded-circle" width="35" alt="Foto de Perfil">
@@ -111,7 +118,7 @@
             </nav>
         </header>
 
-        <div class="offcanvas offcanvas-end w-100 mw-100" tabindex="-1" id="bdNavbar">
+        {{-- <div class="offcanvas offcanvas-end w-100 mw-100" tabindex="-1" id="bdNavbar">
             <div class="px-5 offcanvas-header border-bottom">
                 <span class="text-primary">
                     <svg fill="currentcolor" width="24" height="24" viewBox="0 0 32 32">
@@ -138,7 +145,8 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        </div> --}}
+
         <ul class="dropdown-menu dropdown-menu-end" role="menu">
             <li>
                 <button class="dropdown-item" type="button" id="light-theme-button" data-bs-theme-value="light">
@@ -179,9 +187,89 @@
 
             @yield('content')
 
+            {{-- início mensagem pix doação --}}
+            <div class="mt-4 row g-8">
+
+                            <div class=col-md-6>
+                                <div class="border-0 card bd-card h-100">
+                                    <div class=card-body>
+                                        <div class="mb-4 d-flex align-items-start">
+                                            <img src="{{ asset('storage/images/all-presets-logo.png') }}" alt="Logo All Presets" width="100" height="100">
+                                        </div>
+                                        <h2 class="card-title h5 d-flex align-items-center">O que nos move...</h2>
+                                        <p class="text-body-tertiary fs-sm">
+                                            Nossa proposta vai além de compartilhamento de arquivos:
+                                            é sobre conectar pessoas, inspirar novas sonoridades e transformar experiências individuais em crescimento coletivo.
+                                        </p>
+                                        <span class="text-info">Seja você um iniciante explorando suas primeiras pedaleiras ou um músico experiente em busca de novas possibilidades, este é o seu espaço para:</span>
+                                        <p>
+                                            🎧 Descobrir presets criados por músicos profissionais <br>
+                                            📤 Compartilhar seus próprios timbres <br>
+                                            💬 Trocar experiências reais com quem vive o universo da música <br>
+                                            🤝 Seguir e interagir com outros membros da comunidade <br>
+                                            🚀 Evoluir seu som através da colaboração
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class=col-md-6>
+                                <div class="border-0 card bd-card h-100">
+                                    <div class=card-body>
+                                        <div class="mb-4 d-flex align-items-start">
+                                            <h1><i class="bi bi-emoji-heart-eyes-fill"></i></h1>
+                                        </div>
+                                        <h2 class="card-title h5 d-flex align-items-center">Apoie este projeto!</h2>
+                                        <p class="text-body-tertiary fs-sm justify-items-stretch">
+                                            Nossa plataforma foi criada para ajudar músicos a compartilhar presets, trocar experiências e evoluir juntos. Mantê-la no ar envolve custos de servidores, manutenção e melhorias constantes.
+                                            Se este espaço tem sido útil para você, considere fazer uma doação e contribuir para que ele continue existindo e crescendo.
+                                            Sua ajuda faz toda a diferença! ❤️
+                                        </p>
+                                        <p>
+                                            {{-- criar um botão ou input copiável --}}
+                                            <div class="mb-4 d-flex align-items-start">
+                                                <img src="{{ asset('storage/images/qr-code-2.jpeg') }}" alt="QR Code" width="100" height="100">
+                                            </div>
+                                            <span class="fw-bold">Chave PIX para doações:</span>
+                                            <br>
+                                            <span class="text-info small">
+
+                                            </span>
+                                            {{-- inicio --}}
+                                            <div class="mb-3 input-group">
+                                                <input
+                                                    type="text"
+                                                    class="form-control"
+                                                    id="linkToCopy"
+                                                    value="00020126430014br.gov.bcb.pix0121ed_master@hotmail.com5204000053039865802BR5917EDSON ALVES FILHO6007NITEROI62070503***6304BE10"
+                                                    readonly
+                                                >
+
+                                                    <div class="input-group-append">
+                                                        <button
+                                                            class="btn btn-outline-secondary"
+                                                            type="button"
+                                                            id="copyButton"
+                                                            data-clipboard-target="#linkToCopy"
+                                                            title="Copiar para a Área de Transferência"
+                                                        >
+                                                            <i class="fas fa-copy"></i> Copiar
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <span id="copyFeedback" style="color: green; margin-left: 10px; display: none;">Copiado!</span>
+                                            {{-- fim --}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+            </div>
+            {{-- fim mensagem pix doação --}}
+
             <div class="footer">
                 <div class="container">
-                    <div class="row">
+                    <div class="mt-4 row g-8">
                         <div class="col-md-12">
                             <div class="text-center">
                                 <p class="text-body-tertiary fs-sm"> © {{ date('Y') }} All Presets • Todos os direitos reservados.</p>
@@ -190,50 +278,12 @@
                     </div>
                 </div>
             </div>
+
         </main>
 
     </div>
 
     <button id="scrollToTopBtn" title="Voltar ao Topo" class="back-to-top btn btn-primary">&#8679;</button>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-        const scrollBtn = document.getElementById('scrollToTopBtn');
-
-        // 1. Mostrar/Esconder o botão ao rolar a página
-        window.onscroll = function() {
-            // Verifica se a rolagem vertical (scrollY) é maior que 200 pixels
-            if (window.scrollY > 200) {
-                scrollBtn.classList.add('show');
-            } else {
-                scrollBtn.classList.remove('show');
-            }
-        };
-
-        // 2. Comportamento ao clicar no botão
-        scrollBtn.onclick = function() {
-            // Utiliza o método scrollTo com o objeto de opções
-            window.scrollTo({
-                top: 0, // Define o destino da rolagem para o topo (0px)
-                behavior: 'smooth' // Faz a rolagem de forma suave (animada)
-            });
-        };
-        });
-    </script>
-
-    <script>
-        function getTheme(){
-            return localStorage.getItem('theme') || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
-            );
-        }
-        document.getElementById("themeToggle").addEventListener("click", function(){
-            const currentTheme = getTheme();
-            const newTheme = currentTheme === "dark" ? "light" : "dark";
-            document.documentElement.setAttribute("data-bs-theme", newTheme);
-            localStorage.setItem("theme", newTheme);
-        });
-        document.documentElement.setAttribute("data-bs-theme", getTheme());
-    </script>
 
 </body>
 </html>

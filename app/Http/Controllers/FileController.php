@@ -69,13 +69,15 @@ class FileController extends Controller
     public function home()
     {
         $presets = Consultas::preset();
-        $styles = Consultas::style();
+        $files = Consultas::file()->paginate(20);
+        $styles = Consultas::style()->get();
         $likes = $this->like->all();
         $shares = $this->share->all();
         $comments = $this->comment->all();
         $downloads = $this->download->all();
         return view('home', [
             'presets' => $presets,
+            'files' => $files,
             'styles' => $styles,
             'likes' => $likes,
             'shares' => $shares,
@@ -86,8 +88,8 @@ class FileController extends Controller
 
     public function inicio()
     {
-        $presets = Consultas::preset();
-        $styles = Consultas::style();
+        $files = Consultas::file()->paginate(20);
+        $styles = Consultas::style()->get();
         $likes = $this->like->all();
         $shares = $this->share->all();
         $comments = $this->comment->all();
@@ -97,7 +99,7 @@ class FileController extends Controller
         $segments = $this->segment->all();
 
         return view('inicio', [
-            'presets' => $presets,
+            'files' => $files,
             'styles' => $styles,
             'likes' => $likes,
             'shares' => $shares,
@@ -106,6 +108,17 @@ class FileController extends Controller
             'marcas' => $marcas,
             'equipaments' => $equipaments,
             'segments' => $segments,
+        ]);
+    }
+
+    public function ranking()
+    {
+        $files = Consultas::orderDownloads()->paginate(20);
+        $downloads = $this->download->all();
+
+        return view('ranking', [
+            'files' => $files,
+            'downloads' => $downloads,
         ]);
     }
 
@@ -221,9 +234,9 @@ class FileController extends Controller
     public function show(File $file)
     {
         $user = $this->user->where('id', $file->user_id)->first();
-        $styles = Consultas::style()->where('file_id', $file->id);
-        $file = Consultas::preset()->where('id', $file->id)->first();
-        $comments = Consultas::comment()->where('file_id', $file->id);
+        $styles = Consultas::style()->where('file_id', $file->id)->get();
+        $file = Consultas::file()->where('files.id', $file->id)->first();
+        $comments = Consultas::comment()->where('file_id', $file->id)->get();
         $likes = $this->like->all();
         $shares = $this->share->all();
 

@@ -107,8 +107,7 @@ class Consultas
                 'u.email',
                 'u.foto_perfil',
                 's.nome'
-            )
-            ->paginate(20);
+            );
     }
 
     public static function tone()
@@ -135,21 +134,19 @@ class Consultas
                 'u.foto_perfil as foto',
                 's.nome as segmento',
             )
-            ->where('files.segment_id', 2)
-            ->get();
+            ->where('files.segment_id', 2);
     }
 
     public static function style()
     {
         return Style::query()
-            ->join('files_styles as fs', 'fs.style_id', '=', 'styles.id')
-            ->join('files as f', 'f.id', '=', 'fs.file_id')
+            ->leftJoin('files_styles as fs', 'fs.style_id', '=', 'styles.id')
+            ->leftJoin('files as f', 'f.id', '=', 'fs.file_id')
             ->select(
-                'fs.file_id as file_id',
+                'fs.file_id',
                 'styles.nome as style',
-                'styles.id as style_id'
-            )
-            ->get();
+                'styles.id'
+            );
     }
 
     public static function download()
@@ -161,8 +158,7 @@ class Consultas
                 DB::raw('COUNT(*) as total_downloads')
             )
             ->groupBy('file_id')
-            ->orderByDesc('total_downloads')
-            ->get();
+            ->orderByDesc('total_downloads');
     }
 
     public static function comment()
@@ -181,8 +177,7 @@ class Consultas
                 'f.nome as file_name',
                 'f.descricao as file_description',
                 'f.id as file_id'
-            )
-            ->get();
+            );
     }
 
     public static function orderDownloads()
