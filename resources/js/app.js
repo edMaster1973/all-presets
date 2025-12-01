@@ -160,3 +160,175 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         document.documentElement.setAttribute("data-bs-theme", getTheme());
 
+            document.getElementById('share-button').addEventListener('click', function() {
+
+                const fileId = this.getAttribute('data-file-id');
+                const url = `/file/${fileId}/share`;
+                const token = document.querySelector('meta[name="csrf-token"]').content;
+
+                // Requisição AJAX para gerar o link
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': token,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Exibe o link assinado no campo de texto
+                        const input = document.getElementById('share-link-input');
+                        input.value = data.share_url;
+                        document.getElementById('share-link-container').style.display = 'block';
+                        input.select(); // Seleciona o texto para fácil cópia
+                        alert(data.message);
+                    } else {
+                        alert('Erro ao gerar link.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert('Ocorreu um erro ao processar a requisição.');
+                });
+            });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const followBtn = document.getElementById('follow-btn');
+        const followersCountSpan = document.getElementById('followers-count');
+        const messageBox = document.getElementById('status-message'); // O nosso "alert" estilizado
+
+        if (followBtn) {
+            followBtn.addEventListener('click', function() {
+                const userIdToFollow = this.getAttribute('data-user-id');
+                const url = `/user/${userIdToFollow}/follow`;
+                const token = document.querySelector('meta[name="csrf-token"]').content;
+
+                // Função para manipular a exibição da mensagem
+                const displayMessage = (message, type) => {
+                    messageBox.style.display = 'block';
+                    messageBox.classList.remove('success', 'error', 'btn-primary', 'btn-secondary');
+                    messageBox.classList.add(type); // Adiciona 'success' ou 'error' para estilização
+                    messageBox.textContent = message;
+
+                    // Esconde a mensagem após 5 segundos
+                    setTimeout(() => {
+                        messageBox.style.display = 'none';
+                    }, 5000);
+                };
+
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': token,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        // Trata respostas HTTP que não são 2xx (ex: 403, 500)
+                        throw new Error('Ação não permitida ou erro no servidor.');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // 1. Atualiza o texto do botão
+                    if (data.status === 'following') {
+                        followBtn.textContent = 'Parar de Seguir';
+                        followBtn.classList.remove('btn-primary');
+                        followBtn.classList.add('btn-secondary');
+                    } else {
+                        followBtn.textContent = 'Seguir';
+                        followBtn.classList.remove('btn-secondary');
+                        followBtn.classList.add('btn-primary');
+                    }
+
+                    // 2. Atualiza a contagem de seguidores
+                    if (followersCountSpan && data.followers_count !== undefined) {
+                        followersCountSpan.textContent = data.followers_count;
+                    }
+
+                    // 3. Exibe a mensagem de sucesso
+                    displayMessage(data.message, 'success');
+
+                })
+                .catch(error => {
+                    // Exibe a mensagem de erro (incluindo erros de rede/servidor)
+                    displayMessage('Erro: ' + error.message, 'error');
+                    console.error('Erro:', error);
+                });
+            });
+        }
+    });
+
+
+// script curtir/descurtir comentário //
+function updateIcons(commentId, userLike, userDislike) {
+    const likeIcon = document.getElementById(`icon-like-${commentId}`);
+    const dislikeIcon = document.getElementById(`icon-dislike-${commentId}`);
+
+    if (userLike) {
+        likeIcon.classList.remove("bi-hand-thumbs-up");
+        likeIcon.classList.add("bi-hand-thumbs-up-fill");
+    } else {
+        likeIcon.classList.remove("bi-hand-thumbs-up-fill");
+        likeIcon.classList.add("bi-hand-thumbs-up");
+    }
+
+    if (userDislike) {
+        dislikeIcon.classList.remove("bi-hand-thumbs-down");
+        dislikeIcon.classList.add("bi-hand-thumbs-down-fill");
+    } else {
+        dislikeIcon.classList.remove("bi-hand-thumbs-down-fill");
+        dislikeIcon.classList.add("bi-hand-thumbs-down");
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    document.querySelectorAll('.btnLike').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const commentId = this.dataset.id;
+
+            fetch('/comment/like', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify({ comment_id: commentId })
+            })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById(`like-count-${commentId}`).innerText = data.likes;
+                document.getElementById(`dislike-count-${commentId}`).innerText = data.dislikes;
+                updateIcons(commentId, data.user_like, data.user_dislike);
+            });
+        });
+    });
+
+    document.querySelectorAll('.btnDislike').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const commentId = this.dataset.id;
+
+            fetch('/comment/dislike', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify({ comment_id: commentId })
+            })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById(`like-count-${commentId}`).innerText = data.likes;
+                document.getElementById(`dislike-count-${commentId}`).innerText = data.dislikes;
+                updateIcons(commentId, data.user_like, data.user_dislike);
+            });
+        });
+    });
+});

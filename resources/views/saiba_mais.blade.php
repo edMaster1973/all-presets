@@ -3,14 +3,10 @@
 @section('content')
 
     <div class="bd-main-content">
-        <div class="px-0 max-w-screen-lx px-md-0 px-lg-0 px-xl-0">
-            <div class="px-12 my-8 px-md-12 px-lg-20 px-xl-20">
 
-                {{-- <div class="mb-4 row">
-                    <a href="{{ route('inicio') }}" style="text-decoration: none;">
-                        <i class="bi bi-arrow-left-circle"></i> Voltar
-                    </a>
-                </div> --}}
+        <div class="px-0 max-w-screen-lx px-md-0 px-lg-0 px-xl-0">
+
+            <div class="px-12 my-8 px-md-12 px-lg-20 px-xl-20">
 
                 @foreach ($errors->all() as $error)
                 <div class="mb-4 g-8 row">
@@ -162,7 +158,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-primary" title="Você curtiu">
-                                                <i class="bi bi-hand-thumbs-up-fill"></i>
+                                                <i class="bi bi-heart-fill"></i>
                                             </button>
                                         </form>
                                         @else
@@ -170,7 +166,7 @@
                                             @csrf
                                             <input type="hidden" name="file_id" value="{{ $file->id }}">
                                             <button type="submit" class="btn btn-outline-primary" title="Curtir">
-                                                <i class="bi bi-hand-thumbs-up"></i>
+                                                <i class="bi bi-heart"></i>
                                             </button>
                                         </form>
                                         @endif
@@ -237,7 +233,9 @@
                         </div>
                     </div>
 
-                @foreach ($comments as $comment)
+                @if(!empty($comments))
+
+                    @foreach ($comments as $comment)
 
                         <div class="col-md-12">
                             <div class="border-0 card bd-card h-100">
@@ -263,142 +261,43 @@
                                         <div class="col-10">
                                             <span class="text-secondary fst-italic">{{ $comment->user_email }}</span>
                                             <p>
-                                                {{ $comment->texto }}
+                                                {{ $comment->content }}
                                             </p>
                                         </div>
                                     </div>
+
                                     <div class="mb-4 row">
+
                                         <div class="col-6">
-                                            <a href="#"><i class="bi bi-hand-thumbs-up"></i></a> 0
-                                            <a href="#"><i class="bi bi-hand-thumbs-down"></i></a> 0
+
+                                            <a href="#" class="btnLike" data-id="{{ $comment->id }}" style="text-decoration: none;">
+                                                <i id="icon-like-{{ $comment->id }}" class="bi {{ ($comment->likedByUser ?? ($comment->user_like == 1)) ? 'bi-hand-thumbs-up-fill' : 'bi-hand-thumbs-up' }}"></i>
+                                            </a>
+                                            <span id="like-count-{{ $comment->id }}">{{ $comment->likes_count ?? 0 }}</span>
+
+                                            <a href="#" class="btnDislike" data-id="{{ $comment->id }}" style="text-decoration: none;">
+                                                <i id="icon-dislike-{{ $comment->id }}" class="bi {{ ($comment->dislikedByUser ?? ($comment->user_dislike == 1)) ? 'bi-hand-thumbs-down-fill' : 'bi-hand-thumbs-down' }}"></i>
+                                            </a>
+                                            <span id="dislike-count-{{ $comment->id }}">{{ $comment->dislikes_count ?? 0 }}</span>
+
                                         </div>
+
                                         <div class="col-6 text-end">
                                             <span class="text-info small">{{ \Carbon\Carbon::parse($comment->created_at)->format('d M Y H:i:s') }}</span>
                                         </div>
+
                                     </div>
+
                                 </div>
                             </div>
                         </div>
 
-                @endforeach
+                    @endforeach
+
+                @endif
 
             </div>
 
         </div>
 
-        <script>
-            document.getElementById('share-button').addEventListener('click', function() {
-
-                const fileId = this.getAttribute('data-file-id');
-                const url = `/file/${fileId}/share`;
-                const token = document.querySelector('meta[name="csrf-token"]').content;
-
-                // Requisição AJAX para gerar o link
-                fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': token,
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // Exibe o link assinado no campo de texto
-                        const input = document.getElementById('share-link-input');
-                        input.value = data.share_url;
-                        document.getElementById('share-link-container').style.display = 'block';
-                        input.select(); // Seleciona o texto para fácil cópia
-                        alert(data.message);
-                    } else {
-                        alert('Erro ao gerar link.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-                    alert('Ocorreu um erro ao processar a requisição.');
-                });
-            });
-        </script>
-
-        <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const followBtn = document.getElementById('follow-btn');
-    const followersCountSpan = document.getElementById('followers-count');
-    const messageBox = document.getElementById('status-message'); // O nosso "alert" estilizado
-
-    if (followBtn) {
-        followBtn.addEventListener('click', function() {
-            const userIdToFollow = this.getAttribute('data-user-id');
-            const url = `/user/${userIdToFollow}/follow`;
-            const token = document.querySelector('meta[name="csrf-token"]').content;
-
-            // Função para manipular a exibição da mensagem
-            const displayMessage = (message, type) => {
-                messageBox.style.display = 'block';
-                messageBox.classList.remove('success', 'error', 'btn-primary', 'btn-secondary');
-                messageBox.classList.add(type); // Adiciona 'success' ou 'error' para estilização
-                messageBox.textContent = message;
-
-                // Esconde a mensagem após 5 segundos
-                setTimeout(() => {
-                    messageBox.style.display = 'none';
-                }, 5000);
-            };
-
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': token,
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-            })
-            .then(response => {
-                if (!response.ok) {
-                    // Trata respostas HTTP que não são 2xx (ex: 403, 500)
-                    throw new Error('Ação não permitida ou erro no servidor.');
-                }
-                return response.json();
-            })
-            .then(data => {
-                // 1. Atualiza o texto do botão
-                if (data.status === 'following') {
-                    followBtn.textContent = 'Parar de Seguir';
-                    followBtn.classList.remove('btn-primary');
-                    followBtn.classList.add('btn-secondary');
-                } else {
-                    followBtn.textContent = 'Seguir';
-                    followBtn.classList.remove('btn-secondary');
-                    followBtn.classList.add('btn-primary');
-                }
-
-                // 2. Atualiza a contagem de seguidores
-                if (followersCountSpan && data.followers_count !== undefined) {
-                    followersCountSpan.textContent = data.followers_count;
-                }
-
-                // 3. Exibe a mensagem de sucesso
-                displayMessage(data.message, 'success');
-
-            })
-            .catch(error => {
-                // Exibe a mensagem de erro (incluindo erros de rede/servidor)
-                displayMessage('Erro: ' + error.message, 'error');
-                console.error('Erro:', error);
-            });
-        });
-    }
-});
-</script>
-
-
-
-
-
-
-
 @endsection
-
-

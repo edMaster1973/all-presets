@@ -16,4 +16,24 @@ class Comment extends Model
         'user_id',
         'content',
     ];
+
+    public function likes()
+    {
+        return $this->hasMany(LikeComment::class);
+    }
+
+    public function userLike()
+    {
+        return $this->hasOne(LikeComment::class)->where('user_id', auth()->id());
+    }
+
+    public function getLikedByUserAttribute()
+    {
+        return $this->userLike?->like == 1;
+    }
+
+    public function getDislikedByUserAttribute()
+    {
+        return $this->userLike?->dislike == 1;
+    }
 }

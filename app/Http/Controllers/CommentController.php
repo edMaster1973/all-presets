@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\LikeComment;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -29,6 +30,7 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         if ($request->isMethod('post')) {
+            
             $request->validate([
                 'file_id' => 'required|integer|exists:files,id',
                 'content' => 'required|string|max:1000',
@@ -39,6 +41,15 @@ class CommentController extends Controller
             $comment->file_id = $request->input('file_id');
             $comment->content = $request->input('content');
             $comment->save();
+
+            // faz inserção na tabela likes_comments para o novo comentário //
+            $likeComment = new LikeComment();
+            $likeComment->comment_id = $comment->id;
+            $likeComment->user_id = auth()->id();
+            $likeComment->like = 0;
+            $likeComment->dislike = 0;
+            $likeComment->save();
+            // fim da inserção //
 
             return back()->withErrors('Comentário adicionado com sucesso!');
         }

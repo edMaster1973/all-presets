@@ -10,6 +10,7 @@ use App\Models\Equipament;
 use App\Models\File;
 use App\Models\FileStyle;
 use App\Models\Like;
+use App\Models\LikeComment;
 use App\Models\Marca;
 use App\Models\Segment;
 use App\Models\Share;
@@ -32,6 +33,7 @@ class FileController extends Controller
     protected $like;
     protected $comment;
     protected $share;
+    protected $like_comment;
 
     public function __construct(
         Equipament $equipament,
@@ -45,7 +47,8 @@ class FileController extends Controller
         Download $download,
         Like $like,
         Comment $comment,
-        Share $share
+        Share $share,
+        LikeComment $like_comment
     ) {
         $this->equipament = $equipament;
         $this->file = $file;
@@ -59,6 +62,7 @@ class FileController extends Controller
         $this->like = $like;
         $this->comment = $comment;
         $this->share = $share;
+        $this->like_comment = $like_comment;
     }
 
     public function user()
@@ -267,7 +271,9 @@ class FileController extends Controller
         $user = $this->user->where('id', $file->user_id)->first();
         $styles = Consultas::style()->where('file_id', $file->id)->get();
         $file = Consultas::file()->where('files.id', $file->id)->first();
+
         $comments = Consultas::comment()->where('file_id', $file->id)->get();
+
         $likes = $this->like->all();
         $shares = $this->share->all();
 

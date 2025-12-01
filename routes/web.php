@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EquipamentController;
+use App\Http\Controllers\LikeCommentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -71,6 +72,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/user/{user}/follow', [App\Http\Controllers\FollowController::class, 'toggleFollow'])->name('user.follow');
 
     Route::post('/search_files', [App\Http\Controllers\FileController::class, 'searchFiles'])->name('search.files');
+
+    Route::post('/comment/like', [LikeCommentController::class, 'toggleLike'])->name('comment.like');
+    Route::post('/comment/dislike', [LikeCommentController::class, 'toggleDislike'])->name('comment.dislike');
 });
 
 Route::middleware('auth')->group(function () {
