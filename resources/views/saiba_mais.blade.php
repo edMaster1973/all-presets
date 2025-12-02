@@ -51,8 +51,11 @@
                                         <br>
                                         <span class="text-secondary">{{ $user->email }}</span>
                                         <p>
-                                            <span id="followers-count">{{ $user->followers->count() }}</span> seguidores <br>
 
+                                            <span id="followers-count" class="fst-italic">{{ $user->followers->count() }} seguidores</span>
+
+
+                                            <div class="container">
                                             @auth
                                                 @if (Auth::user()->id !== $user->id)
                                                     <button
@@ -66,6 +69,7 @@
                                                     <span class="text-warning">Esse é o seu perfil.</span>
                                                 @endif
                                             @endauth
+                                            </div>
                                         </p>
                                     </div>
                                 </div>
