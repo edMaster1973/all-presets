@@ -5,16 +5,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <link rel="shortcut icon" href="{{ asset('storage/images/favicon.ico') }}" >
+        <link rel="shortcut icon" href="{{ Vite::asset('resources/images/favicon.ico') }}" >
         <title>All Presets</title>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
         <header class="py-0 navbar navbar-expand-lg sticky-top bd-navbar">
             <nav class="container-fluid px-md-3 px-lg-4">
-                <a class="p-0 p-1 m-0 rounded navbar-brand d-inline-flex align-items-center me-lg-6 me-xl-9 text-reset" href="/">
+                <a class="p-0 m-0 rounded navbar-brand d-inline-flex align-items-center me-lg-6 me-xl-9 text-reset" href="/">
                     <span class=text-primary>
-                        <img src="{{ asset('storage/images/all-presets-logo.png') }}" alt="Logo All Presets" width="50" height="50">
+                        <img src="{{ Vite::asset('resources/images/all-presets-logo.png') }}" alt="Logo All Presets" width="50" height="50">
                     </span>
                     <h2 class="mb-0 d-none d-md-block fw-semibold fs-5 ls-wide ms-2">All Presets</h2>
                 </a>

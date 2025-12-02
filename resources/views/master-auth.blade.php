@@ -4,16 +4,16 @@
         <meta http-equiv="x-ua-compatible" content="IE=edge">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <link rel="shortcut icon" href="{{ asset('storage/images/favicon.ico') }}" >
+        <link rel="shortcut icon" href="{{ Vite::asset('resources/images/favicon.ico') }}" >
         <title>All Presets</title>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
         <header class="py-0 navbar navbar-expand-lg sticky-top bd-navbar">
             <nav class="container-fluid px-md-3 px-lg-4">
-                <a class="p-0 p-1 m-0 rounded navbar-brand d-inline-flex align-items-center me-lg-6 me-xl-9 text-reset" href="/">
+                <a class="p-0 m-0 rounded navbar-brand d-inline-flex align-items-center me-lg-6 me-xl-9 text-reset" href="/">
                     <span class=text-primary>
-                        <img src="{{ asset('images/all-presets-logo.png') }}" alt="Logo All Presets" width="68" height="68">
+                        <img src="{{ Vite::asset('resources/images/all-presets-logo.png') }}" alt="Logo All Presets" width="68" height="68">
                     </span>
                     <h2 class="mb-0 d-none d-md-block fw-semibold fs-5 ls-wide ms-2"></h2>
                 </a>
@@ -89,7 +89,7 @@
                     @if(!empty(Auth::user()->foto_perfil))
                         <img src="{{ asset(Auth::user()->foto_perfil) }}" class="rounded-circle" width="35" alt="Foto de Perfil">
                     @else
-                        <img src="{{ asset('storage/images/user-1.png') }}" class="rounded-circle" width="35" alt="Imagem de Perfil">
+                        <img src="{{ Vite::asset('resources/images/user-1.png') }}" class="rounded-circle" width="35" alt="Imagem de Perfil">
                     @endif
 
                     <button class="border-0 btn" type="button" data-bs-toggle="dropdown">
@@ -213,7 +213,7 @@
                                 <div class="border-0 card bd-card h-100">
                                     <div class=card-body>
                                         <div class="mb-4 d-flex align-items-start">
-                                            <img src="{{ asset('storage/images/all-presets-logo.png') }}" alt="Logo All Presets" width="100" height="100">
+                                            <img src="{{ Vite::asset('resources/images/all-presets-logo.png') }}" alt="Logo All Presets" width="100" height="100">
                                         </div>
                                         <h2 class="card-title h5 d-flex align-items-center">O que nos move...</h2>
                                         <p class="text-body-tertiary fs-sm">
@@ -247,7 +247,7 @@
                                         <p>
                                             {{-- criar um botão ou input copiável --}}
                                             <div class="mb-4 d-flex align-items-start">
-                                                <img src="{{ asset('storage/images/qr-code-2.jpeg') }}" alt="QR Code" width="100" height="100">
+                                                <img src="{{ Vite::asset('resources/images/qr-code-2.jpeg') }}" alt="QR Code" width="100" height="100">
                                             </div>
                                             <span class="fw-bold">Chave PIX para doações:</span>
                                             <br>

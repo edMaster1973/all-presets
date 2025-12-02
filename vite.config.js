@@ -23,8 +23,8 @@ export default defineConfig({
         },
     },
 
-    build: {
-        outDir: "public/build",
-        manifest: "manifest.json",
-    },
+    // build: {
+    //     outDir: "public/build",
+    //     manifest: "manifest.json",
+    // },
 });
