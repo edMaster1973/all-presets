@@ -40,6 +40,10 @@
                             <a class="nav-link {{ Route::is('meus_arquivos') ? 'active' : '' }}" href="{{ route('meus_arquivos') }}">Meus Arquivos</a>
                         </li>
 
+                        <li class=nav-item>
+                            <a class="nav-link {{ Route::is('user.seguidores') ? 'active' : '' }}" href="{{ route('user.seguidores') }}">Seguidores</a>
+                        </li>
+
                     </ul>
                 </div>
                 <div class="gap-3 d-flex align-items-center ms-auto me-2 me-lg-3">

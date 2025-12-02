@@ -74,7 +74,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/search_files', [App\Http\Controllers\FileController::class, 'searchFiles'])->name('search.files');
 
     Route::post('/comment/like', [LikeCommentController::class, 'toggleLike'])->name('comment.like');
+
     Route::post('/comment/dislike', [LikeCommentController::class, 'toggleDislike'])->name('comment.dislike');
+
+    Route::get('/seguidores', [App\Http\Controllers\FollowController::class, 'seguidores'])->name('user.seguidores');
 });
 
 Route::middleware('auth')->group(function () {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\MasterClass\Consultas;
 use App\Models\User;
 
 class FollowController extends Controller
@@ -30,5 +31,11 @@ class FollowController extends Controller
             'status' => $isFollowing ? 'following' : 'not_following',
             'followers_count' => $user->followers()->count() // <-- ESSA É A CHAVE
         ]);
+    }
+
+    public function seguidores()
+    {
+        $followers = Consultas::seguidores()->where('uf.user_id', auth()->user()->id)->get();
+        return view('seguidores', compact('followers'));
     }
 }
