@@ -76,6 +76,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/seguidores', [App\Http\Controllers\FollowController::class, 'seguidores'])->name('user.seguidores');
 
     Route::put('/file/{file}/update', [App\Http\Controllers\FileController::class, 'update'])->name('file.update');
+
+    Route::delete('/file/{file}/destroy', [App\Http\Controllers\FileController::class, 'destroy'])->name('file.destroy');
 });
 
 Route::middleware('auth')->group(function () {

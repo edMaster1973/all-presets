@@ -403,4 +403,26 @@ class FileController extends Controller
             ]);
         }
     }
+
+    public function destroy(File $file)
+    {
+        if ($file) {
+
+            // excluir o arquivo físico se existir //
+            if ($file->file_path && file_exists(public_path($file->file_path))) {
+                unlink(public_path($file->file_path));
+            }
+
+            // excluir o arquivo de imagem se existir //
+            if ($file->image_path && file_exists(public_path($file->image_path))) {
+                unlink(public_path($file->image_path));
+            }
+
+            // excluir o registro do banco de dados //
+            $file->delete();
+
+            return back()->withErrors('Arquivo excluído com sucesso!');
+        }
+        return back()->withErrors('Ops! Erro ao excluir o arquivo.');
+    }
 }

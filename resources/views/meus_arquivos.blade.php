@@ -60,13 +60,13 @@
                                         <button class="btn btn-sm btn-warning" title="Visualizar" data-bs-toggle="modal" data-bs-target="#visualizar{{ $f->id }}">
                                             <i class="fa fa-eye"></i>
                                         </button>
-                                        <button class="btn btn-sm btn-success" title="Baixar">
+                                        <button class="btn btn-sm btn-success" title="Baixar" data-bs-toggle="modal" data-bs-target="#download{{ $f->id }}">
                                             <i class="fa fa-download"></i>
                                         </button>
                                         <button class="btn btn-sm btn-primary" title="Editar" data-bs-toggle="modal" data-bs-target="#editar{{ $f->id }}">
                                             <i class="fa fa-edit"></i>
                                         </button>
-                                        <button class="btn btn-sm btn-danger" title="Excluir">
+                                        <button class="btn btn-sm btn-danger" title="Excluir" data-bs-toggle="modal" data-bs-target="#delete{{ $f->id }}">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </td>
@@ -81,8 +81,109 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            {{ $f->id }}
+
+                                            {{-- segmento --}}
+                                            <div class="mt-2 row">
+                                                <div class="col-4 text-end">
+                                                    <label class="text-primary">Segmento</label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class="text-secondary">{{ $f->segmento }}</span>
+                                                </div>
+                                            </div>
+
+                                            {{-- produto --}}
+                                            <div class="mt-2 row">
+                                                <div class="col-4 text-end">
+                                                    <label class="text-primary">Equipamento</label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class="text-secondary">{{ $f->produto_nome }}</span>
+                                                </div>
+                                            </div>
+
+                                            {{-- titulo --}}
+                                            <div class="mt-2 row">
+                                                <div class="col-4 text-end">
+                                                    <label class="text-primary">Título</label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class="text-secondary">{{ $f->nome }}</span>
+                                                </div>
+                                            </div>
+
+                                            {{-- descricao --}}
+                                            <div class="mt-2 row">
+                                                <div class="col-4 text-end">
+                                                    <label class="text-primary">Descrição</label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class="text-secondary">{{ $f->descricao }}</span>
+                                                </div>
+                                            </div>
+
+                                            {{-- tags --}}
+                                            <div class="mt-2 row">
+                                                <div class="col-4 text-end">
+                                                    <label class="text-primary">Tags</label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class="text-secondary">{{ $f->tags }}</span>
+                                                </div>
+                                            </div>
+
+                                            {{-- link audio --}}
+                                            <div class="mt-2 row">
+                                                <div class="col-4 text-end">
+                                                    <label class="text-primary">Link do Áudio</label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class="text-secondary">{{ $f->link_audio }}</span>
+                                                </div>
+                                            </div>
+
+                                            {{-- link video --}}
+                                            <div class="mt-2 row">
+                                                <div class="col-4 text-end">
+                                                    <label class="text-primary">Link do Vídeo</label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class="text-secondary">{{ $f->link_video }}</span>
+                                                </div>
+                                            </div>
+
+                                            {{-- instrumento --}}
+                                            <div class="mt-2 row">
+                                                <div class="col-4 text-end">
+                                                    <label class="text-primary">Instrumento</label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class="text-secondary">{{ $f->instrumento }}</span>
+                                                </div>
+                                            </div>
+
+                                            {{-- privacidade --}}
+                                            <div class="mt-2 row">
+                                                <div class="col-4 text-end">
+                                                    <label class="text-primary">Privacidade</label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class="text-secondary">{{ $f->privacidade }}</span>
+                                                </div>
+                                            </div>
+
+                                            {{-- imagem --}}
+                                            <div class="mt-2 row">
+                                                <div class="col-4 text-end">
+                                                    <label class="text-primary">Imagem</label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class="text-secondary"><img src="{{ asset($f->img) }}" alt="Imagem do arquivo" width="180" class="rounded-3"></span>
+                                                </div>
+                                            </div>
+
                                         </div>
+                                        <hr>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                                         </div>
@@ -191,6 +292,135 @@
                                     </div>
                                 </div>
                                 {{-- fim modal editar --}}
+                                
+                                {{-- Modal dowload --}}
+                                <div class="modal fade" id="download{{ $f->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5 text-primary" id="exampleModalLabel">Excluir</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            
+                                            {{-- segmento --}}
+                                            <div class="mt-2 row">
+                                                <div class="col-4 text-end">
+                                                    <label class="text-primary">Segmento</label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class="text-secondary">{{ $f->segmento }}</span>
+                                                </div>
+                                            </div>
+
+                                            {{-- produto --}}
+                                            <div class="mt-2 row">
+                                                <div class="col-4 text-end">
+                                                    <label class="text-primary">Equipamento</label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class="text-secondary">{{ $f->produto_nome }}</span>
+                                                </div>
+                                            </div>
+
+                                            {{-- titulo --}}
+                                            <div class="mt-2 row">
+                                                <div class="col-4 text-end">
+                                                    <label class="text-primary">Título</label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class="text-secondary">{{ $f->nome }}</span>
+                                                </div>
+                                            </div>
+
+                                            {{-- descricao --}}
+                                            <div class="mt-2 row">
+                                                <div class="col-4 text-end">
+                                                    <label class="text-primary">Descrição</label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class="text-secondary">{{ $f->descricao }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                            <form method="POST" action="{{ route('download.arquivos') }}" >
+                                                @csrf
+                                                <input type="hidden" name="file_path" value="{{ $f->file_path }}">
+                                                <input type="hidden" name="file_id" value="{{ $f->id }}">
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                                    <button type="submit" class="btn btn-success">Download</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- fim modal download --}}
+
+                                {{-- Modal delete --}}
+                                <div class="modal fade" id="delete{{ $f->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5 text-primary" id="exampleModalLabel">Excluir</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            
+                                            {{-- segmento --}}
+                                            <div class="mt-2 row">
+                                                <div class="col-4 text-end">
+                                                    <label class="text-primary">Segmento</label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class="text-secondary">{{ $f->segmento }}</span>
+                                                </div>
+                                            </div>
+
+                                            {{-- produto --}}
+                                            <div class="mt-2 row">
+                                                <div class="col-4 text-end">
+                                                    <label class="text-primary">Equipamento</label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class="text-secondary">{{ $f->produto_nome }}</span>
+                                                </div>
+                                            </div>
+
+                                            {{-- titulo --}}
+                                            <div class="mt-2 row">
+                                                <div class="col-4 text-end">
+                                                    <label class="text-primary">Título</label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class="text-secondary">{{ $f->nome }}</span>
+                                                </div>
+                                            </div>
+
+                                            {{-- descricao --}}
+                                            <div class="mt-2 row">
+                                                <div class="col-4 text-end">
+                                                    <label class="text-primary">Descrição</label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class="text-secondary">{{ $f->descricao }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                            <form method="POST" action="{{ route('file.destroy', ['file' => $f->id]) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                                    <button type="submit" class="btn btn-danger">Excluir</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- fim modal delete --}}
                                 @endforeach
                             </tbody>
                         </table>
