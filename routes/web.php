@@ -9,10 +9,6 @@ Route::get('/', [App\Http\Controllers\FileController::class, 'home'])->name('hom
 
 Route::get('/mais_baixados', [App\Http\Controllers\FileController::class, 'mostDownloaded'])->name('mais_baixados');
 
-// Route::get('/tones', function () {
-//     return view('tones');
-// })->name('tones');
-
 Route::get('/logar', function () {
     return view('login');
 })->name('entrar');
@@ -78,6 +74,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/comment/dislike', [LikeCommentController::class, 'toggleDislike'])->name('comment.dislike');
 
     Route::get('/seguidores', [App\Http\Controllers\FollowController::class, 'seguidores'])->name('user.seguidores');
+
+    Route::put('/file/{file}/update', [App\Http\Controllers\FileController::class, 'update'])->name('file.update');
 });
 
 Route::middleware('auth')->group(function () {

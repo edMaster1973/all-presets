@@ -294,6 +294,41 @@ class FileController extends Controller
         ]);
     }
 
+    public function update(Request $request, File $file)
+    {
+        // verifica arquivo de imagem no request //
+        if ($request->hasFile('image_path') && $request->file('image_path')->isValid()) {
+
+            // excluir o arquivo antigo se existir //
+            if ($file->image_path && file_exists(public_path($file->image_path))) {
+                unlink(public_path($file->image_path));
+            }
+
+            $requestImage = $request->file('image_path');
+            $extension = $requestImage->extension();
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime('now')) . '.' . $extension;
+            $requestImage->move(public_path('images'), $imageName);
+            $file->image_path = 'images/' . $imageName;
+            $file->save();
+        }
+
+        if ($request) {
+
+            $file->nome = $request->nome;
+            $file->descricao = $request->descricao;
+            $file->instrumento = $request->instrumento;
+            $file->tags = $request->tags;
+            $file->link_audio = $request->link_audio;
+            $file->link_video = $request->link_video;
+            $file->privacidade = $request->privacidade;
+            $file->save();
+
+            return back()->withErrors('Arquivo atualizado com sucesso!');
+        }
+
+        return back()->withErrors('Ops! Algo deu errado.');
+    }
+
     public function downloadZip(Request $request)
     {
         // forçar compactação em zip de um arquivo e download //

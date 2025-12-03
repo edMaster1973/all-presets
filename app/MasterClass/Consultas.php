@@ -32,6 +32,8 @@ class Consultas
                 'files.privacidade',
                 'files.instrumento',
                 'files.tags',
+                'files.link_audio',
+                'files.link_video',
                 'e.nome as produto_nome',
                 'e.id as produto_id',
                 'e.descricao as produto_descricao',
