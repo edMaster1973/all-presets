@@ -82,6 +82,8 @@
                                         </div>
                                         <div class="modal-body">
 
+                                            <div style="overflow-y: scroll; max-height: 350px; overflow-x: hidden;">
+
                                             {{-- segmento --}}
                                             <div class="mt-2 row">
                                                 <div class="col-4 text-end">
@@ -122,6 +124,30 @@
                                                 </div>
                                             </div>
 
+                                            {{-- imagem --}}
+                                            <div class="mt-2 row">
+                                                <div class="col-4 text-end">
+                                                    <label class="text-primary">Imagem</label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class="text-secondary"><img src="{{ asset($f->img) }}" alt="Imagem do arquivo" width="180" class="rounded-3"></span>
+                                                </div>
+                                            </div>
+
+                                            {{-- files_styles --}}
+                                            <div class="mt-2 row">
+                                                <div class="col-4 text-end">
+                                                    <label class="text-primary">Estilos</label>
+                                                </div>
+                                                <div class="col-8">
+                                                    @foreach ($styles as $s)
+                                                        @if ($f->id == $s->file_id)
+                                                            <span class="badge bg-info text-dark">{{ $s->style }}</span>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            </div>
+
                                             {{-- tags --}}
                                             <div class="mt-2 row">
                                                 <div class="col-4 text-end">
@@ -129,26 +155,6 @@
                                                 </div>
                                                 <div class="col-8">
                                                     <span class="text-secondary">{{ $f->tags }}</span>
-                                                </div>
-                                            </div>
-
-                                            {{-- link audio --}}
-                                            <div class="mt-2 row">
-                                                <div class="col-4 text-end">
-                                                    <label class="text-primary">Link do Áudio</label>
-                                                </div>
-                                                <div class="col-8">
-                                                    <span class="text-secondary">{{ $f->link_audio }}</span>
-                                                </div>
-                                            </div>
-
-                                            {{-- link video --}}
-                                            <div class="mt-2 row">
-                                                <div class="col-4 text-end">
-                                                    <label class="text-primary">Link do Vídeo</label>
-                                                </div>
-                                                <div class="col-8">
-                                                    <span class="text-secondary">{{ $f->link_video }}</span>
                                                 </div>
                                             </div>
 
@@ -172,21 +178,40 @@
                                                 </div>
                                             </div>
 
-                                            {{-- imagem --}}
+
+
+                                            {{-- link audio --}}
                                             <div class="mt-2 row">
                                                 <div class="col-4 text-end">
-                                                    <label class="text-primary">Imagem</label>
+                                                    <label class="text-primary">Link do Áudio</label>
                                                 </div>
                                                 <div class="col-8">
-                                                    <span class="text-secondary"><img src="{{ asset($f->img) }}" alt="Imagem do arquivo" width="180" class="rounded-3"></span>
+                                                    <span class="text-secondary">{{ $f->link_audio }}</span>
+                                                </div>
+                                            </div>
+
+                                            {{-- link video --}}
+                                            <div class="mt-2 row">
+                                                <div class="col-4 text-end">
+                                                    <label class="text-primary">Link do Vídeo</label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class="text-secondary">{{ $f->link_video }}</span>
                                                 </div>
                                             </div>
 
                                         </div>
-                                        <hr>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+
                                         </div>
+
+
+                                            <hr>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                            </div>
+
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -287,22 +312,21 @@
 
                                         </form>
 
-
                                         </div>
                                     </div>
                                 </div>
                                 {{-- fim modal editar --}}
-                                
+
                                 {{-- Modal dowload --}}
                                 <div class="modal fade" id="download{{ $f->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5 text-primary" id="exampleModalLabel">Excluir</h1>
+                                            <h1 class="modal-title fs-5 text-primary" id="exampleModalLabel">Download</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            
+
                                             {{-- segmento --}}
                                             <div class="mt-2 row">
                                                 <div class="col-4 text-end">
@@ -367,7 +391,7 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            
+
                                             {{-- segmento --}}
                                             <div class="mt-2 row">
                                                 <div class="col-4 text-end">

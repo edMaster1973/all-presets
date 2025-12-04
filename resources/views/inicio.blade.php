@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="d-none d-md-block col-md-4 col-lg-6">
-                    <img src="{{ asset('storage/images/img-fundo-4.png') }}" alt="Imagem de boas-vindas" width="580">
+                    <img src="{{ Vite::asset('resources/images/img-fundo-4.png') }}" alt="Imagem de boas-vindas" width="580">
                 </div>
             </div>
         </div>

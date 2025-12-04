@@ -127,9 +127,11 @@ class FileController extends Controller
     public function filesUser()
     {
         $files = Consultas::file()->where('files.user_id', auth()->user()->id)->get();
+        $styles = Consultas::style()->get();
 
         return view('meus_arquivos', [
-            'files' => $files
+            'files' => $files,
+            'styles' => $styles,
         ]);
     }
 
