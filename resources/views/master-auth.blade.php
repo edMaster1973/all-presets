@@ -54,6 +54,8 @@
                         </a>
                     </div>
 
+
+
                     <div class="position-relative">
                         <button class="border-0 btn" id="themeToggle">
                             <i class="bi bi-brightness-high" id="sunIcon"></i>
@@ -62,59 +64,126 @@
                     </div>
 
                     <div class="position-relative">
+
                         <button class="border-0 btn" type="button" data-bs-toggle="dropdown">
                             <i class="bi bi-bell"></i>
                         </button>
-                        <div class="notification-list mx-h-350 customscroll">
-                            <ul class="dropdown-menu dropdown-menu-end" role="menu">
+
+                        <ul class="overflow-y-auto dropdown-menu dropdown-menu-end" style="max-height: 350px; width: 300px; overflow-x: hidden; padding-left: 0; padding-right: 0;" role="menu">
+
                             <li>
-                                <div class="items-center pt-3 pb-2">
-                                    <div class="row">
-                                        <div class="text-end col-4">
-                                            <img src="{{ Vite::asset('resources/images/user-1.png') }}" alt="User Image" width="30" class="rounded-circle">
+                                <div class="pt-3 pb-2">
+                                    <div class="row g-0">
+                                        <div class="text-center col-2">
+                                            <img src="{{ Vite::asset('resources/images/user-1.png') }}" width="30" class="rounded-circle">
                                         </div>
-                                        <div class="col-8">
-                                            <span class="text-info fw-bold">Jonh</span>
-                                            <br>
+                                        <div class="col-10">
+                                            <span class="text-info fw-bold">Jonh</span><br>
                                             <span class="text-secondary small">Olá, tudo bem?</span>
                                         </div>
                                     </div>
                                 </div>
                             </li>
+                            <hr>
                             <li>
-                                <div class="items-center pt-5 pb-3">
-                                    <div class="row">
-                                        <div class="text-end col-4">
-                                            <img src="{{ Vite::asset('resources/images/user-1.png') }}" alt="User Image" width="30" class="rounded-circle">
+                                <div class="pt-3 pb-2">
+                                    <div class="row g-0">
+                                        <div class="text-center col-2">
+                                            <img src="{{ Vite::asset('resources/images/user-1.png') }}" width="30" class="rounded-circle">
                                         </div>
-                                        <div class="col-8">
-                                            <span class="text-info fw-bold">Luke</span>
-                                            <br>
-                                            <span class="text-secondary small">Ipsum Lorem ipsum dolor sit amet consectetu...</span>
+                                        <div class="col-10">
+                                            <span class="text-info fw-bold">Lara</span><br>
+                                            <span class="text-secondary small">Temos novidades pra você.</span>
                                         </div>
                                     </div>
                                 </div>
                             </li>
+                            <hr>
                             <li>
-                                <div class="items-center pt-3 pb-2">
-                                    <div class="row">
-                                        <div class="text-end col-4">
-                                            <img src="{{ Vite::asset('resources/images/user-1.png') }}" alt="User Image" width="30" class="rounded-circle">
+                                <div class="pt-3 pb-2">
+                                    <div class="row g-0">
+                                        <div class="text-center col-2">
+                                            <img src="{{ Vite::asset('resources/images/user-1.png') }}" width="30" class="rounded-circle">
                                         </div>
-                                        <div class="col-8">
-                                            <span class="text-info fw-bold">Anna</span>
-                                            <br>
-                                            <span class="text-secondary small">Ipsum Lorem ipsum dolor sit amet consectetu...</span>
+                                        <div class="col-10">
+                                            <span class="text-info fw-bold">Clark</span><br>
+                                            <span class="text-secondary small">Ótimas notícias.</span>
                                         </div>
                                     </div>
                                 </div>
                             </li>
-                        </ul>
+                            <hr>
+                            <li>
+                                <div class="pt-3 pb-2">
+                                    <div class="row g-0">
+                                        <div class="text-center col-2">
+                                            <img src="{{ Vite::asset('resources/images/user-1.png') }}" width="30" class="rounded-circle">
+                                        </div>
+                                        <div class="col-10">
+                                            <span class="text-info fw-bold">Luke W. Born</span><br>
+                                            <span class="text-secondary small">Vem chegando um novo ano, cheio de expectativas...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <hr>
+                            <li>
+                                <div class="pt-3 pb-2">
+                                    <div class="row g-0">
+                                        <div class="text-center col-2">
+                                            <img src="{{ Vite::asset('resources/images/user-1.png') }}" width="30" class="rounded-circle">
+                                        </div>
+                                        <div class="col-10">
+                                            <span class="text-info fw-bold">Anna</span><br>
+                                            <span class="text-secondary small">O melhor está por vir.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
 
-                        </div>
+                        </ul>
                     </div>
 
+                    <!--
 
+                    <div class="position-relative">
+                        <button class="border-0 btn" type="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-bell"></i>
+                        </button>
+                        <div class="notification-list mx-h-350 customscroll">
+                            <ul class="dropdown-menu dropdown-menu-end" role="menu">
+                                <li>
+                                    <div class="items-center pt-3 pb-2">
+                                        <div class="row">
+                                            <div class="text-end col-4">
+                                                <img src="{{ Vite::asset('resources/images/user-1.png') }}" alt="User Image" width="30" class="rounded-circle">
+                                            </div>
+                                            <div class="col-8">
+                                                <span class="text-info fw-bold">Jonh</span>
+                                                <br>
+                                                <span class="text-secondary small">Olá, tudo bem?</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="items-center pt-5 pb-3">
+                                        <div class="row">
+                                            <div class="text-end col-4">
+                                                <img src="{{ Vite::asset('resources/images/user-1.png') }}" alt="User Image" width="30" class="rounded-circle">
+                                            </div>
+                                            <div class="col-8">
+                                                <span class="text-info fw-bold">Luke</span>
+                                                <br>
+                                                <span class="text-secondary small">Ipsum Lorem ipsum dolor sit amet consectetu...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                -->
 
                     @if(!empty(Auth::user()->foto_perfil))
                         <img src="{{ asset(Auth::user()->foto_perfil) }}" class="rounded-circle" width="35" alt="Foto de Perfil">
