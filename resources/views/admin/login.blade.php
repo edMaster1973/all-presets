@@ -20,25 +20,25 @@
                     <div class=col-md-12>
 
                         <div class="items-center gap-3 mb-4 text-center">
-                            <img src="{{ asset('images/all-presets-logo.png') }}" alt="Logo All Presets" width="75" height="75">
+                            <img src="{{ Vite::asset('resources/images/all-presets-logo.png') }}" alt="Logo All Presets" width="75" height="75">
                         </div>
                         <div class="items-center gap-3 mb-4 text-center">
-                            <h5>Sign in • All Presets</h5>
+                            <h5>Login • Admin</h5>
                         </div>
 
                         {{-- alert --}}
-                    @foreach ($errors->all() as $error)
-                    <div class="text-center alert alert-primary alert-dismissible fade show" role="alert">
-                        {{ $error }}.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    @endforeach
+                        @foreach ($errors->all() as $error)
+                        <div class="text-center alert alert-primary alert-dismissible fade show" role="alert">
+                            {{ $error }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        @endforeach
 
                         <div class="border-0 card bd-card">
                             <div class=card-body>
                                 <div class="row">
                                     <div class="col-12">
-                                        <form method="POST" action="{{ route('login') }}">
+                                        <form method="POST" action="{{ route('admin.login.post') }}">
                                             @csrf
                                             <div class="mb-2 form-group">
                                                 <div class="gap-2 mb-3 row">

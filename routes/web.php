@@ -3,6 +3,7 @@
 use App\Http\Controllers\EquipamentController;
 use App\Http\Controllers\LikeCommentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminAuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\FileController::class, 'home'])->name('home');
@@ -12,6 +13,10 @@ Route::get('/mais_baixados', [App\Http\Controllers\FileController::class, 'mostD
 Route::get('/logar', function () {
     return view('login');
 })->name('entrar');
+
+Route::get('/admin/login', [App\Http\Controllers\AdminAuthController::class, 'loginForm'])->name('admin.login');
+
+Route::post('/admin/login', [App\Http\Controllers\AdminAuthController::class, 'authenticateAdmin'])->name('admin.login.post');
 
 Route::get('/registrar_se', [App\Http\Controllers\UserController::class, 'create'])->name('registrar_se');
 
@@ -85,5 +90,17 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::middleware(['auth', 'admin'])
+    ->prefix('admin')
+    ->group(function () {
+
+        Route::get('/dashboard', function () {
+            return view('admin.dashboard');
+        })->name('admin.dashboard');
+
+        Route::post('/logout', [AdminAuthController::class, 'logoutAdmin'])
+            ->name('admin.logout');
+    });
 
 require __DIR__ . '/auth.php';
